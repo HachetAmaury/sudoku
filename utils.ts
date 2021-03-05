@@ -183,6 +183,11 @@ export function resolveOneIteration(grid) {
 
             if (!listOfPossibilityForSpecificSpot.length) continue;
 
+            if (listOfPossibilityForSpecificSpot.length !== 1) continue;
+
+            // console.log(`${i} ${j}`);
+            // console.log(listOfPossibilityForSpecificSpot);
+
             grid[i][j] = listOfPossibilityForSpecificSpot[0];
         }
     }

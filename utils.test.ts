@@ -416,6 +416,26 @@ console.log('=========================================================');
 //     displayGrid(grid);
 // });
 
+// test('try to add a number on all the grid line ', () => {
+//     const grid = [
+//         [0, 6, 0, 0, 0, 0, 0, 1, 0],
+//         [0, 0, 0, 6, 5, 1, 0, 0, 0],
+//         [1, 0, 7, 0, 0, 0, 6, 0, 2],
+//         [6, 2, 0, 3, 0, 5, 0, 9, 4],
+//         [0, 0, 3, 0, 0, 0, 2, 0, 0],
+//         [4, 8, 0, 9, 0, 7, 0, 3, 6],
+//         [9, 0, 6, 0, 0, 0, 4, 0, 8],
+//         [0, 0, 0, 7, 9, 4, 0, 0, 0],
+//         [0, 5, 0, 0, 0, 0, 0, 7, 0],
+//     ];
+
+//     displayGrid(grid);
+
+//     resolveOneIteration(grid);
+
+//     displayGrid(grid);
+// });
+
 test('try to add a number on all the grid line ', () => {
     const grid = [
         [0, 6, 0, 0, 0, 0, 0, 1, 0],
@@ -429,7 +449,9 @@ test('try to add a number on all the grid line ', () => {
         [0, 5, 0, 0, 0, 0, 0, 7, 0],
     ];
 
-    resolveOneIteration(grid);
+    for (let i = 0; i < 9; i++) {
+        displayGrid(grid);
 
-    displayGrid(grid);
+        resolveOneIteration(grid);
+    }
 });
