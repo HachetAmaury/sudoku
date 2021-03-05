@@ -138,3 +138,52 @@ export function getSetsForSpotOnGrid(
 
     return mergeDecimalSets(mergeDecimalSets(squaresSet, rowSet), columnSet);
 }
+
+export function displayGrid(grid) {
+    let gridToDisplay = '';
+    for (let i = 0; i < grid.length; i++) {
+        if (i % 3 === 0)
+            gridToDisplay += '  ----------------------------------' + '\n';
+
+        for (let j = 0; j < grid.length; j++) {
+            if (j % 3 === 0) gridToDisplay += ' | ';
+            gridToDisplay += ` ${grid[i][j] === 0 ? '-' : grid[i][j]} `;
+        }
+        gridToDisplay += '| \n';
+    }
+    gridToDisplay += '  ----------------------------------' + '\n';
+
+    console.log(gridToDisplay);
+}
+
+export function resolveOneIteration(grid) {
+    for (let i = 0; i < grid.length; i++) {
+        for (let j = 0; j < grid.length; j++) {
+            if (grid[i][j] !== 0) continue;
+
+            let columnsSets = getColumnsSetsFromGrid(grid);
+            let rowsSets = getRowsSetsFromGrid(grid);
+            let squaresSets = getSquaresSetsFromGrid(grid);
+
+            let setsForSpotOnGrid = getSetsForSpotOnGrid(
+                i,
+                j,
+                columnsSets,
+                rowsSets,
+                squaresSets,
+            );
+
+            let missingSetsForSpotOnGrid = getMissingBinarySetFromBinarySet(
+                setsForSpotOnGrid,
+            );
+
+            let listOfPossibilityForSpecificSpot = decimalSetToNumbersList(
+                missingSetsForSpotOnGrid,
+            );
+
+            if (!listOfPossibilityForSpecificSpot.length) continue;
+
+            grid[i][j] = listOfPossibilityForSpecificSpot[0];
+        }
+    }
+}

@@ -14,6 +14,8 @@ import {
     specificSquareHasNumber,
     mergeDecimalSets,
     getSetsForSpotOnGrid,
+    displayGrid,
+    resolveOneIteration,
 } from './utils';
 
 test('decimalToBinary(256) to equals 100000000', () => {
@@ -179,7 +181,7 @@ test('getSetsForSpotOnGrid(4,0,columnsSets,rowsSets,squaresSets) should equals 0
     ).toEqual(binarySetToDecimalSet('010100000'));
 });
 
-test('Available number for spot grid[4][0] should be  [1,2,3,5,7,9]', () => {
+test('Available number for spot grid[4][0] should be [1,2,3,5,7,9]', () => {
     const setsForSpotOnGrid = getSetsForSpotOnGrid(
         4,
         0,
@@ -201,4 +203,233 @@ test('Available number for spot grid[4][0] should be  [1,2,3,5,7,9]', () => {
         7,
         9,
     ]);
+});
+
+// test('try to add a number on first spot 0 0 ', () => {
+//     const grid = [
+//         [0, 0, 0, 0, 0, 1, 0, 0, 0],
+//         [0, 0, 9, 0, 0, 0, 0, 0, 0],
+//         [0, 0, 0, 0, 0, 0, 3, 0, 0],
+//         [0, 0, 0, 0, 1, 0, 0, 0, 0],
+//         [0, 6, 0, 0, 0, 0, 0, 0, 0],
+//         [0, 0, 0, 0, 0, 0, 0, 5, 0],
+//         [8, 0, 0, 0, 0, 0, 0, 0, 0],
+//         [0, 0, 0, 7, 0, 0, 0, 0, 0],
+//         [0, 0, 0, 0, 0, 0, 0, 0, 2],
+//     ];
+
+//     displayGrid(grid);
+
+//     const i = 0;
+//     const j = 0;
+
+//     let columnsSets = getColumnsSetsFromGrid(grid);
+//     let rowsSets = getRowsSetsFromGrid(grid);
+//     let squaresSets = getSquaresSetsFromGrid(grid);
+
+//     let setsForSpotOnGrid = getSetsForSpotOnGrid(
+//         i,
+//         j,
+//         columnsSets,
+//         rowsSets,
+//         squaresSets,
+//     );
+
+//     let missingSetsForSpotOnGrid = getMissingBinarySetFromBinarySet(
+//         setsForSpotOnGrid,
+//     );
+
+//     let listOfPossibilityForSpecificSpot = decimalSetToNumbersList(
+//         missingSetsForSpotOnGrid,
+//     );
+
+//     expect(listOfPossibilityForSpecificSpot).toEqual([2, 3, 4, 5, 6, 7]);
+
+//     grid[i][j] = listOfPossibilityForSpecificSpot[0];
+
+//     displayGrid(grid);
+
+//     columnsSets = getColumnsSetsFromGrid(grid);
+//     rowsSets = getRowsSetsFromGrid(grid);
+//     squaresSets = getSquaresSetsFromGrid(grid);
+
+//     setsForSpotOnGrid = getSetsForSpotOnGrid(
+//         i,
+//         j,
+//         columnsSets,
+//         rowsSets,
+//         squaresSets,
+//     );
+
+//     missingSetsForSpotOnGrid = getMissingBinarySetFromBinarySet(
+//         setsForSpotOnGrid,
+//     );
+
+//     listOfPossibilityForSpecificSpot = decimalSetToNumbersList(
+//         missingSetsForSpotOnGrid,
+//     );
+
+//     expect(listOfPossibilityForSpecificSpot).toEqual([3, 4, 5, 6, 7]);
+// });
+
+console.log('=========================================================');
+
+// test('try to add a number on first 3 spots', () => {
+//     const grid = [
+//         [0, 0, 0, 0, 0, 1, 0, 0, 0],
+//         [0, 0, 9, 0, 0, 0, 0, 0, 0],
+//         [0, 0, 0, 0, 0, 0, 3, 0, 0],
+//         [0, 0, 0, 0, 1, 0, 0, 0, 0],
+//         [0, 6, 0, 0, 0, 0, 0, 0, 0],
+//         [0, 0, 0, 0, 0, 0, 0, 5, 0],
+//         [8, 0, 0, 0, 0, 0, 0, 0, 0],
+//         [0, 0, 0, 7, 0, 0, 0, 0, 0],
+//         [0, 0, 0, 0, 0, 0, 0, 0, 2],
+//     ];
+
+//     const i = 0;
+
+//     for (let j = 0; j < 3; j++) {
+//         if (grid[i][j] !== 0) continue;
+
+//         let columnsSets = getColumnsSetsFromGrid(grid);
+//         let rowsSets = getRowsSetsFromGrid(grid);
+//         let squaresSets = getSquaresSetsFromGrid(grid);
+
+//         let setsForSpotOnGrid = getSetsForSpotOnGrid(
+//             i,
+//             j,
+//             columnsSets,
+//             rowsSets,
+//             squaresSets,
+//         );
+
+//         let missingSetsForSpotOnGrid = getMissingBinarySetFromBinarySet(
+//             setsForSpotOnGrid,
+//         );
+
+//         let listOfPossibilityForSpecificSpot = decimalSetToNumbersList(
+//             missingSetsForSpotOnGrid,
+//         );
+
+//         grid[i][j] = listOfPossibilityForSpecificSpot[0];
+
+//         displayGrid(grid);
+//     }
+// });
+
+// test('try to add a number on first line ', () => {
+//     const grid = [
+//         [0, 0, 0, 0, 0, 1, 0, 0, 0],
+//         [0, 0, 9, 0, 0, 0, 0, 0, 0],
+//         [0, 0, 0, 0, 0, 0, 3, 0, 0],
+//         [0, 0, 0, 0, 1, 0, 0, 0, 0],
+//         [0, 6, 0, 0, 0, 0, 0, 0, 0],
+//         [0, 0, 0, 0, 0, 0, 0, 5, 0],
+//         [8, 0, 0, 0, 0, 0, 0, 0, 0],
+//         [0, 0, 0, 7, 0, 0, 0, 0, 0],
+//         [0, 0, 0, 0, 0, 0, 0, 0, 2],
+//     ];
+
+//     const i = 0;
+
+//     for (let j = 0; j < grid.length; j++) {
+//         if (grid[i][j] !== 0) continue;
+
+//         let columnsSets = getColumnsSetsFromGrid(grid);
+//         let rowsSets = getRowsSetsFromGrid(grid);
+//         let squaresSets = getSquaresSetsFromGrid(grid);
+
+//         let setsForSpotOnGrid = getSetsForSpotOnGrid(
+//             i,
+//             j,
+//             columnsSets,
+//             rowsSets,
+//             squaresSets,
+//         );
+
+//         let missingSetsForSpotOnGrid = getMissingBinarySetFromBinarySet(
+//             setsForSpotOnGrid,
+//         );
+
+//         let listOfPossibilityForSpecificSpot = decimalSetToNumbersList(
+//             missingSetsForSpotOnGrid,
+//         );
+
+//         grid[i][j] = listOfPossibilityForSpecificSpot[0];
+
+//         displayGrid(grid);
+//     }
+// });
+
+// test('try to add a number on all the grid line ', () => {
+//     const grid = [
+//         [0, 0, 0, 0, 0, 1, 0, 0, 0],
+//         [0, 0, 9, 0, 0, 0, 0, 0, 0],
+//         [0, 0, 0, 0, 0, 0, 3, 0, 0],
+//         [0, 0, 0, 0, 1, 0, 0, 0, 0],
+//         [0, 6, 0, 0, 0, 0, 0, 0, 0],
+//         [0, 0, 0, 0, 0, 0, 0, 5, 0],
+//         [8, 0, 0, 0, 0, 0, 0, 0, 0],
+//         [0, 0, 0, 7, 0, 0, 0, 0, 0],
+//         [0, 0, 0, 0, 0, 0, 0, 0, 2],
+//     ];
+
+//     resolveOneIteration(grid);
+
+//     displayGrid(grid);
+// });
+
+// test('try to add a number on all the grid line ', () => {
+//     const grid = [
+//         [0, 0, 0, 0, 0, 1, 0, 0, 0],
+//         [0, 0, 9, 0, 0, 0, 0, 0, 0],
+//         [0, 0, 0, 0, 0, 0, 3, 0, 0],
+//         [0, 0, 0, 0, 1, 0, 0, 0, 0],
+//         [0, 6, 0, 0, 0, 0, 0, 0, 0],
+//         [0, 0, 0, 0, 0, 0, 0, 5, 0],
+//         [8, 0, 0, 0, 0, 0, 0, 0, 0],
+//         [0, 0, 0, 7, 0, 0, 0, 0, 0],
+//         [0, 0, 0, 0, 0, 0, 0, 0, 2],
+//     ];
+
+//     resolveOneIteration(grid);
+
+//     displayGrid(grid);
+// });
+
+// test('try to add a number on all the grid line ', () => {
+//     const grid = [
+//         [3, 0, 0, 2, 0, 1, 0, 0, 0],
+//         [7, 4, 0, 0, 0, 0, 0, 1, 9],
+//         [0, 2, 0, 0, 6, 0, 5, 0, 0],
+//         [0, 3, 0, 7, 4, 0, 0, 0, 1],
+//         [0, 0, 8, 0, 0, 0, 9, 0, 0],
+//         [6, 0, 0, 0, 9, 2, 0, 5, 0],
+//         [0, 0, 2, 0, 8, 0, 0, 4, 0],
+//         [1, 5, 0, 0, 0, 0, 0, 9, 7],
+//         [0, 0, 0, 9, 0, 3, 0, 0, 2],
+//     ];
+
+//     resolveOneIteration(grid);
+
+//     displayGrid(grid);
+// });
+
+test('try to add a number on all the grid line ', () => {
+    const grid = [
+        [0, 6, 0, 0, 0, 0, 0, 1, 0],
+        [0, 0, 0, 6, 5, 1, 0, 0, 0],
+        [1, 0, 7, 0, 0, 0, 6, 0, 2],
+        [6, 2, 0, 3, 0, 5, 0, 9, 4],
+        [0, 0, 3, 0, 0, 0, 2, 0, 0],
+        [4, 8, 0, 9, 0, 7, 0, 3, 6],
+        [9, 0, 6, 0, 0, 0, 4, 0, 8],
+        [0, 0, 0, 7, 9, 4, 0, 0, 0],
+        [0, 5, 0, 0, 0, 0, 0, 7, 0],
+    ];
+
+    resolveOneIteration(grid);
+
+    displayGrid(grid);
 });

@@ -1035,3 +1035,733 @@ Let's also create a CHANGELOG
 -   mergeDecimalSets
 -   getSetsForSpotOnGrid
 ```
+
+19:41 : OK back to display the grid
+
+19:51 :
+
+```javascript
+export function displayGrid(grid) {
+    let gridToDisplay = '';
+    for (let i = 0; i < grid.length; i++) {
+        if (i % 3 === 0)
+            gridToDisplay += '  ----------------------------------' + '\n';
+
+        for (let j = 0; j < grid.length; j++) {
+            if (j % 3 === 0) gridToDisplay += ' | ';
+            gridToDisplay += ` ${grid[i][j]} `;
+        }
+        gridToDisplay += '| \n';
+    }
+    gridToDisplay += '  ----------------------------------' + '\n';
+
+    console.log(gridToDisplay);
+}
+```
+
+```
+displayGrid(grid);
+
+      ----------------------------------
+     |  0  0  0  |  0  0  1  |  0  0  0 |
+     |  0  0  9  |  0  0  0  |  0  0  0 |
+     |  0  0  0  |  0  0  0  |  3  0  0 |
+      ----------------------------------
+     |  0  0  0  |  0  1  0  |  0  0  0 |
+     |  0  6  0  |  0  0  0  |  0  0  0 |
+     |  0  0  0  |  0  0  0  |  0  5  0 |
+      ----------------------------------
+     |  8  0  0  |  0  0  0  |  0  0  0 |
+     |  0  0  0  |  7  0  0  |  0  0  0 |
+     |  0  0  0  |  0  0  0  |  0  0  2 |
+      ----------------------------------
+```
+
+19:54 : let's display "-" instead of "0"
+
+```javascript
+export function displayGrid(grid) {
+    let gridToDisplay = '';
+    for (let i = 0; i < grid.length; i++) {
+        if (i % 3 === 0)
+            gridToDisplay += '  ----------------------------------' + '\n';
+
+        for (let j = 0; j < grid.length; j++) {
+            if (j % 3 === 0) gridToDisplay += ' | ';
+            gridToDisplay += ` ${grid[i][j] === 0 ? '-' : grid[i][j]} `;
+        }
+        gridToDisplay += '| \n';
+    }
+    gridToDisplay += '  ----------------------------------' + '\n';
+
+    console.log(gridToDisplay);
+}
+```
+
+```
+displayGrid(grid);
+      ----------------------------------
+     |  -  -  -  |  -  -  1  |  -  -  - |
+     |  -  -  9  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  3  -  - |
+      ----------------------------------
+     |  -  -  -  |  -  1  -  |  -  -  - |
+     |  -  6  -  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  -  5  - |
+      ----------------------------------
+     |  8  -  -  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  7  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  -  -  2 |
+      ----------------------------------
+```
+
+20:00 : Ok now let's try to add a number on the first spot : grid[0][0] :
+
+```javascript
+test('try to add a number on first spot 0 0 ', () => {
+    const grid = [
+        [0, 0, 0, 0, 0, 1, 0, 0, 0],
+        [0, 0, 9, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 3, 0, 0],
+        [0, 0, 0, 0, 1, 0, 0, 0, 0],
+        [0, 6, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 5, 0],
+        [8, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 7, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 2],
+    ];
+
+    displayGrid(grid);
+
+    const i = 0;
+    const j = 0;
+
+    let columnsSets = getColumnsSetsFromGrid(grid);
+    let rowsSets = getRowsSetsFromGrid(grid);
+    let squaresSets = getSquaresSetsFromGrid(grid);
+
+    let setsForSpotOnGrid = getSetsForSpotOnGrid(
+        i,
+        j,
+        columnsSets,
+        rowsSets,
+        squaresSets,
+    );
+
+    let missingSetsForSpotOnGrid = getMissingBinarySetFromBinarySet(
+        setsForSpotOnGrid,
+    );
+
+    let listOfPossibilityForSpecificSpot = decimalSetToNumbersList(
+        missingSetsForSpotOnGrid,
+    );
+
+    expect(listOfPossibilityForSpecificSpot).toEqual([2, 3, 4, 5, 6, 7]);
+
+    grid[i][j] = listOfPossibilityForSpecificSpot[0];
+
+    displayGrid(grid);
+
+    columnsSets = getColumnsSetsFromGrid(grid);
+    rowsSets = getRowsSetsFromGrid(grid);
+    squaresSets = getSquaresSetsFromGrid(grid);
+
+    setsForSpotOnGrid = getSetsForSpotOnGrid(
+        i,
+        j,
+        columnsSets,
+        rowsSets,
+        squaresSets,
+    );
+
+    missingSetsForSpotOnGrid = getMissingBinarySetFromBinarySet(
+        setsForSpotOnGrid,
+    );
+
+    listOfPossibilityForSpecificSpot = decimalSetToNumbersList(
+        missingSetsForSpotOnGrid,
+    );
+
+    expect(listOfPossibilityForSpecificSpot).toEqual([3, 4, 5, 6, 7]);
+});
+```
+
+```
+      ----------------------------------
+     |  -  -  -  |  -  -  1  |  -  -  - |
+     |  -  -  9  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  3  -  - |
+      ----------------------------------
+     |  -  -  -  |  -  1  -  |  -  -  - |
+     |  -  6  -  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  -  5  - |
+      ----------------------------------
+     |  8  -  -  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  7  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  -  -  2 |
+      ----------------------------------
+
+      ----------------------------------
+     |  2  -  -  |  -  -  1  |  -  -  - |
+     |  -  -  9  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  3  -  - |
+      ----------------------------------
+     |  -  -  -  |  -  1  -  |  -  -  - |
+     |  -  6  -  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  -  5  - |
+      ----------------------------------
+     |  8  -  -  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  7  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  -  -  2 |
+      ----------------------------------
+
+```
+
+IT WORKS !!!!!!
+
+Next step 3 iterations :
+
+20:12
+
+```javascript
+test('try to add a number on first 3 spots', () => {
+    const grid = [
+        [0, 0, 0, 0, 0, 1, 0, 0, 0],
+        [0, 0, 9, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 3, 0, 0],
+        [0, 0, 0, 0, 1, 0, 0, 0, 0],
+        [0, 6, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 5, 0],
+        [8, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 7, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 2],
+    ];
+
+    const i = 0;
+
+    for (let j = 0; j < 3; j++) {
+        if (grid[i][j] !== 0) break;
+
+        let columnsSets = getColumnsSetsFromGrid(grid);
+        let rowsSets = getRowsSetsFromGrid(grid);
+        let squaresSets = getSquaresSetsFromGrid(grid);
+
+        let setsForSpotOnGrid = getSetsForSpotOnGrid(
+            i,
+            j,
+            columnsSets,
+            rowsSets,
+            squaresSets,
+        );
+
+        let missingSetsForSpotOnGrid = getMissingBinarySetFromBinarySet(
+            setsForSpotOnGrid,
+        );
+
+        let listOfPossibilityForSpecificSpot = decimalSetToNumbersList(
+            missingSetsForSpotOnGrid,
+        );
+
+        grid[i][j] = listOfPossibilityForSpecificSpot[0];
+
+        displayGrid(grid);
+    }
+});
+```
+
+```
+
+
+      ----------------------------------
+     |  2  -  -  |  -  -  1  |  -  -  - |
+     |  -  -  9  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  3  -  - |
+      ----------------------------------
+     |  -  -  -  |  -  1  -  |  -  -  - |
+     |  -  6  -  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  -  5  - |
+      ----------------------------------
+     |  8  -  -  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  7  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  -  -  2 |
+      ----------------------------------
+
+
+      ----------------------------------
+     |  2  3  -  |  -  -  1  |  -  -  - |
+     |  -  -  9  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  3  -  - |
+      ----------------------------------
+     |  -  -  -  |  -  1  -  |  -  -  - |
+     |  -  6  -  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  -  5  - |
+      ----------------------------------
+     |  8  -  -  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  7  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  -  -  2 |
+      ----------------------------------
+
+
+      ----------------------------------
+     |  2  3  4  |  -  -  1  |  -  -  - |
+     |  -  -  9  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  3  -  - |
+      ----------------------------------
+     |  -  -  -  |  -  1  -  |  -  -  - |
+     |  -  6  -  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  -  5  - |
+      ----------------------------------
+     |  8  -  -  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  7  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  -  -  2 |
+      ----------------------------------
+
+```
+
+YEAAAAH !!!
+
+20:12 :
+
+NOOOOB alert ^^
+
+```javascript
+if (grid[i][j] !== 0) break;
+```
+
+I wanted to continue, to to break the loop ....
+
+```javascript
+if (grid[i][j] !== 0) continue;
+```
+
+20:14 : IT WOOORKS !!!
+
+```javascript
+test('try to add a number on first line ', () => {
+    const grid = [
+        [0, 0, 0, 0, 0, 1, 0, 0, 0],
+        [0, 0, 9, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 3, 0, 0],
+        [0, 0, 0, 0, 1, 0, 0, 0, 0],
+        [0, 6, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 5, 0],
+        [8, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 7, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 2],
+    ];
+
+    const i = 0;
+
+    for (let j = 0; j < grid.length; j++) {
+        if (grid[i][j] !== 0) continue;
+
+        let columnsSets = getColumnsSetsFromGrid(grid);
+        let rowsSets = getRowsSetsFromGrid(grid);
+        let squaresSets = getSquaresSetsFromGrid(grid);
+
+        let setsForSpotOnGrid = getSetsForSpotOnGrid(
+            i,
+            j,
+            columnsSets,
+            rowsSets,
+            squaresSets,
+        );
+
+        let missingSetsForSpotOnGrid = getMissingBinarySetFromBinarySet(
+            setsForSpotOnGrid,
+        );
+
+        let listOfPossibilityForSpecificSpot = decimalSetToNumbersList(
+            missingSetsForSpotOnGrid,
+        );
+
+        grid[i][j] = listOfPossibilityForSpecificSpot[0];
+
+        displayGrid(grid);
+    }
+});
+```
+
+```
+
+      ----------------------------------
+     |  2  -  -  |  -  -  1  |  -  -  - |
+     |  -  -  9  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  3  -  - |
+      ----------------------------------
+     |  -  -  -  |  -  1  -  |  -  -  - |
+     |  -  6  -  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  -  5  - |
+      ----------------------------------
+     |  8  -  -  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  7  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  -  -  2 |
+      ----------------------------------
+
+
+      ----------------------------------
+     |  2  3  -  |  -  -  1  |  -  -  - |
+     |  -  -  9  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  3  -  - |
+      ----------------------------------
+     |  -  -  -  |  -  1  -  |  -  -  - |
+     |  -  6  -  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  -  5  - |
+      ----------------------------------
+     |  8  -  -  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  7  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  -  -  2 |
+      ----------------------------------
+
+
+      ----------------------------------
+     |  2  3  4  |  -  -  1  |  -  -  - |
+     |  -  -  9  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  3  -  - |
+      ----------------------------------
+     |  -  -  -  |  -  1  -  |  -  -  - |
+     |  -  6  -  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  -  5  - |
+      ----------------------------------
+     |  8  -  -  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  7  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  -  -  2 |
+      ----------------------------------
+
+
+      ----------------------------------
+     |  2  3  4  |  5  -  1  |  -  -  - |
+     |  -  -  9  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  3  -  - |
+      ----------------------------------
+     |  -  -  -  |  -  1  -  |  -  -  - |
+     |  -  6  -  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  -  5  - |
+      ----------------------------------
+     |  8  -  -  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  7  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  -  -  2 |
+      ----------------------------------
+
+
+
+      ----------------------------------
+     |  2  3  4  |  5  6  1  |  -  -  - |
+     |  -  -  9  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  3  -  - |
+      ----------------------------------
+     |  -  -  -  |  -  1  -  |  -  -  - |
+     |  -  6  -  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  -  5  - |
+      ----------------------------------
+     |  8  -  -  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  7  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  -  -  2 |
+      ----------------------------------
+
+
+      ----------------------------------
+     |  2  3  4  |  5  6  1  |  7  -  - |
+     |  -  -  9  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  3  -  - |
+      ----------------------------------
+     |  -  -  -  |  -  1  -  |  -  -  - |
+     |  -  6  -  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  -  5  - |
+      ----------------------------------
+     |  8  -  -  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  7  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  -  -  2 |
+      ----------------------------------
+
+
+      ----------------------------------
+     |  2  3  4  |  5  6  1  |  7  8  - |
+     |  -  -  9  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  3  -  - |
+      ----------------------------------
+     |  -  -  -  |  -  1  -  |  -  -  - |
+     |  -  6  -  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  -  5  - |
+      ----------------------------------
+     |  8  -  -  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  7  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  -  -  2 |
+      ----------------------------------
+
+
+      ----------------------------------
+     |  2  3  4  |  5  6  1  |  7  8  9 |
+     |  -  -  9  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  3  -  - |
+      ----------------------------------
+     |  -  -  -  |  -  1  -  |  -  -  - |
+     |  -  6  -  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  -  5  - |
+      ----------------------------------
+     |  8  -  -  |  -  -  -  |  -  -  - |
+     |  -  -  -  |  7  -  -  |  -  -  - |
+     |  -  -  -  |  -  -  -  |  -  -  2 |
+      ----------------------------------
+
+```
+
+20:18 : Let's go, now all the grid !
+
+```javascript
+test('try to add a number on all the grid', () => {
+    const grid = [
+        [0, 0, 0, 0, 0, 1, 0, 0, 0],
+        [0, 0, 9, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 3, 0, 0],
+        [0, 0, 0, 0, 1, 0, 0, 0, 0],
+        [0, 6, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 5, 0],
+        [8, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 7, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 2],
+    ];
+
+    for (let i = 0; i < grid.length; i++) {
+        for (let j = 0; j < grid.length; j++) {
+            if (grid[i][j] !== 0) continue;
+
+            let columnsSets = getColumnsSetsFromGrid(grid);
+            let rowsSets = getRowsSetsFromGrid(grid);
+            let squaresSets = getSquaresSetsFromGrid(grid);
+
+            let setsForSpotOnGrid = getSetsForSpotOnGrid(
+                i,
+                j,
+                columnsSets,
+                rowsSets,
+                squaresSets,
+            );
+
+            let missingSetsForSpotOnGrid = getMissingBinarySetFromBinarySet(
+                setsForSpotOnGrid,
+            );
+
+            let listOfPossibilityForSpecificSpot = decimalSetToNumbersList(
+                missingSetsForSpotOnGrid,
+            );
+
+            grid[i][j] = listOfPossibilityForSpecificSpot[0];
+
+            displayGrid(grid);
+        }
+    }
+});
+```
+
+```
+
+      ----------------------------------
+     |  2  3  4  |  5  6  1  |  7  8  9 |
+     |  1  5  9  |  2  3  4  |  6  undefined  undefined |
+     |  6  7  8  |  9  undefined  undefined  |  3  2  4 |
+      ----------------------------------
+     |  3  2  5  |  4  1  6  |  8  7  undefined |
+     |  4  6  1  |  3  2  5  |  9  undefined  undefined |
+     |  7  8  undefined  |  undefined  9  undefined  |  2  5  3 |
+      ----------------------------------
+     |  8  1  2  |  6  4  3  |  5  9  7 |
+     |  5  4  3  |  7  8  2  |  1  6  undefined |
+     |  9  undefined  6  |  undefined  5  undefined  |  4  3  2 |
+      ----------------------------------
+
+```
+
+20:20 : Mmmmmm maybe sometime it doesn't find any solutiuon for this spot
+
+Code added :
+
+```javascript
+if (!listOfPossibilityForSpecificSpot.length) continue;
+```
+
+```
+      ----------------------------------
+     |  2  3  4  |  5  6  1  |  7  8  9 |
+     |  1  5  9  |  2  3  4  |  6  -  - |
+     |  6  7  8  |  9  -  -  |  3  1  4 |
+      ----------------------------------
+     |  3  2  5  |  4  1  6  |  8  7  - |
+     |  4  6  1  |  3  2  5  |  9  -  - |
+     |  7  8  -  |  -  9  -  |  1  5  3 |
+      ----------------------------------
+     |  8  1  2  |  6  4  3  |  5  9  7 |
+     |  5  4  3  |  7  8  2  |  -  6  1 |
+     |  9  -  6  |  1  5  -  |  4  3  2 |
+      ----------------------------------
+```
+
+IT WOOORKS !!
+
+20:22 : Ok so it might be time to make a function in order to call it again if needed
+
+```javascript
+export function resolveOneIteration(grid) {
+    for (let i = 0; i < grid.length; i++) {
+        for (let j = 0; j < grid.length; j++) {
+            if (grid[i][j] !== 0) continue;
+
+            let columnsSets = getColumnsSetsFromGrid(grid);
+            let rowsSets = getRowsSetsFromGrid(grid);
+            let squaresSets = getSquaresSetsFromGrid(grid);
+
+            let setsForSpotOnGrid = getSetsForSpotOnGrid(
+                i,
+                j,
+                columnsSets,
+                rowsSets,
+                squaresSets,
+            );
+
+            let missingSetsForSpotOnGrid = getMissingBinarySetFromBinarySet(
+                setsForSpotOnGrid,
+            );
+
+            let listOfPossibilityForSpecificSpot = decimalSetToNumbersList(
+                missingSetsForSpotOnGrid,
+            );
+
+            if (!listOfPossibilityForSpecificSpot.length) continue;
+
+            grid[i][j] = listOfPossibilityForSpecificSpot[0];
+        }
+    }
+    displayGrid(grid);
+}
+```
+
+```javascript
+test('try to add a number on all the grid line ', () => {
+    const grid = [
+        [0, 0, 0, 0, 0, 1, 0, 0, 0],
+        [0, 0, 9, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 3, 0, 0],
+        [0, 0, 0, 0, 1, 0, 0, 0, 0],
+        [0, 6, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 5, 0],
+        [8, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 7, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 2],
+    ];
+
+    resolveOneIteration(grid);
+});
+```
+
+```
+     ----------------------------------
+     |  2  3  4  |  5  6  1  |  7  8  9 |
+     |  1  5  9  |  2  3  4  |  6  -  - |
+     |  6  7  8  |  9  -  -  |  3  1  4 |
+      ----------------------------------
+     |  3  2  5  |  4  1  6  |  8  7  - |
+     |  4  6  1  |  3  2  5  |  9  -  - |
+     |  7  8  -  |  -  9  -  |  1  5  3 |
+      ----------------------------------
+     |  8  1  2  |  6  4  3  |  5  9  7 |
+     |  5  4  3  |  7  8  2  |  -  6  1 |
+     |  9  -  6  |  1  5  -  |  4  3  2 |
+      ----------------------------------
+```
+
+Ok, still working !
+
+20:28 : Remove display grid from function
+
+```javascript
+test('try to add a number on all the grid line ', () => {
+    const grid = [
+        [0, 0, 0, 0, 0, 1, 0, 0, 0],
+        [0, 0, 9, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 3, 0, 0],
+        [0, 0, 0, 0, 1, 0, 0, 0, 0],
+        [0, 6, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 5, 0],
+        [8, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 7, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 2],
+    ];
+
+    resolveOneIteration(grid);
+
+    displayGrid(grid);
+});
+```
+
+```
+     ----------------------------------
+     |  2  3  4  |  5  6  1  |  7  8  9 |
+     |  1  5  9  |  2  3  4  |  6  -  - |
+     |  6  7  8  |  9  -  -  |  3  1  4 |
+      ----------------------------------
+     |  3  2  5  |  4  1  6  |  8  7  - |
+     |  4  6  1  |  3  2  5  |  9  -  - |
+     |  7  8  -  |  -  9  -  |  1  5  3 |
+      ----------------------------------
+     |  8  1  2  |  6  4  3  |  5  9  7 |
+     |  5  4  3  |  7  8  2  |  -  6  1 |
+     |  9  -  6  |  1  5  -  |  4  3  2 |
+      ----------------------------------
+```
+
+Still Working !!
+
+20:31 : Calling resolveOneIteration(grid); is not enough ;
+
+```javascript
+  |  2  3  4  |  5  6  1  |  7  8  9 |
+  |  1  5  9  |  2  3  4  |  6  -  - |
+  |  6  7  8  |  9  -  -  |  3  1  4 |
+```
+
+Our grid is WRONG : the last square can't have any 2
+
+It's time to add some back-tracking : this path is wrong we have to try another one
+For the moment we try to add the first possibility for each spot, eahc time we try a possibility we must call a function recursively to try all the pssibility
+
+Let's first try with an easy grid, with less possibilities :
+
+```javascript
+test('try to add a number on all the grid line ', () => {
+    const grid = [
+        [3, 0, 0, 2, 0, 1, 0, 0, 0],
+        [7, 4, 0, 0, 0, 0, 0, 1, 9],
+        [0, 2, 0, 0, 6, 0, 5, 0, 0],
+        [0, 3, 0, 7, 4, 0, 0, 0, 1],
+        [0, 0, 8, 0, 0, 0, 9, 0, 0],
+        [6, 0, 0, 0, 9, 2, 0, 5, 0],
+        [0, 0, 2, 0, 8, 0, 0, 4, 0],
+        [1, 5, 0, 0, 0, 0, 0, 9, 7],
+        [0, 0, 0, 9, 0, 3, 0, 0, 2],
+    ];
+
+    resolveOneIteration(grid);
+
+    displayGrid(grid);
+});
+```
+
+```
+      ----------------------------------
+     |  3  6  5  |  2  7  1  |  4  8  - |
+     |  7  4  -  |  3  5  8  |  2  1  9 |
+     |  8  2  1  |  4  6  9  |  5  3  - |
+      ----------------------------------
+     |  2  3  9  |  7  4  5  |  6  -  1 |
+     |  4  1  8  |  6  3  -  |  9  2  - |
+     |  6  7  -  |  1  9  2  |  3  5  4 |
+      ----------------------------------
+     |  9  -  2  |  5  8  6  |  1  4  3 |
+     |  1  5  3  |  -  2  4  |  8  9  7 |
+     |  -  8  4  |  9  1  3  |  -  6  2 |
+      ----------------------------------
+```
+
+Same probleme, too much solutiuons :)
+
+20:44 : It's not that there are too much solutiuons, the algorith of always selecting the first possibility can't work, we should maybe trys to add where there is only one possibility and try again

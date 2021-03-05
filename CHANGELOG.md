@@ -1,4 +1,10 @@
-## [1.0.0] - 2021-03-05 - RELEASE
+## 2021-03-05
+
+## Added
+
+-   resolveOneIteration
+
+## [1.0.0] - 2021-03-05
 
 ## Added
 
