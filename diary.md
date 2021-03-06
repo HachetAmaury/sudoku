@@ -2194,3 +2194,7 @@ test('resolve', () => {
  |  1  5  7  |  2  8  3  |  6  9  4 |
   ----------------------------------
 ```
+
+03:21 : So I started at 12:00, made 4h of pause so I managed to do it in less than 12 hours !!!
+
+The next step is the UI, but for now time to sleep :)
