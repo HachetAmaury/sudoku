@@ -16,9 +16,9 @@ yarn init
 
 ```json
 {
-    "tabWidth": 4,
-    "singleQuote": true,
-    "trailingComma": "all"
+  "tabWidth": 4,
+  "singleQuote": true,
+  "trailingComma": "all"
 }
 ```
 
@@ -32,13 +32,13 @@ yarn add typescript
 
 ```json
 {
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaVersion": 2020,
-        "sourceType": "module"
-    },
-    "extends": ["plugin:@typescript-eslint/recommended"],
-    "rules": {}
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "extends": ["plugin:@typescript-eslint/recommended"],
+  "rules": {}
 }
 ```
 
@@ -60,9 +60,9 @@ Add the jest command to package.json
 
 ```json
 {
-    "scripts": {
-        "test": "jest"
-    }
+  "scripts": {
+    "test": "jest"
+  }
 }
 ```
 
@@ -70,7 +70,7 @@ Add the jest command to package.json
 
 ```javascript
 function sum(a, b) {
-    return a + b;
+  return a + b;
 }
 module.exports = sum;
 ```
@@ -112,7 +112,7 @@ creating sum.ts file :
 
 ```javascript
 function sum(a, b) {
-    return a + b;
+  return a + b;
 }
 module.exports = sum;
 ```
@@ -120,10 +120,10 @@ module.exports = sum;
 changing sum.test.ts to :
 
 ```javascript
-const sum = require('./sum');
+const sum = require("./sum");
 
-test('adds 1 + 2 to equal 3', () => {
-    expect(sum(1, 2)).toBe(3);
+test("adds 1 + 2 to equal 3", () => {
+  expect(sum(1, 2)).toBe(3);
 });
 ```
 
@@ -159,7 +159,7 @@ sum.ts :
 
 ```javascript
 function sum(a, b) {
-    return a + b;
+  return a + b;
 }
 export default sum;
 ```
@@ -167,10 +167,10 @@ export default sum;
 sum.test.ts :
 
 ```javascript
-import sum from './sum';
+import sum from "./sum";
 
-test('adds 1 + 2 to equal 3', () => {
-    expect(sum(1, 2)).toBe(3);
+test("adds 1 + 2 to equal 3", () => {
+  expect(sum(1, 2)).toBe(3);
 });
 ```
 
@@ -296,7 +296,7 @@ The sets are then converted to decimal
 
 To get a grid as an array of numbers :
 
--   Rows
+- Rows
 
 ```
  -----------------------
@@ -320,7 +320,7 @@ So all the Rows sets for this grid can be stored to an array :
 [1, 256, 4, 1, 32, 16, 128, 64, 2];
 ```
 
--   Columns
+- Columns
 
 ```
  -----------------------
@@ -355,7 +355,7 @@ So all the columns sets for this grid can be stored to an array :
 [0, 32, 256, 64, 1, 1, 4, 16, 2];
 ```
 
--   Squares
+- Squares
 
 ```
  -----------------------
@@ -399,27 +399,27 @@ The grid will be stored as a 2 dimensions array :
 
 ```javascript
 const grid = [
-    [0, 0, 0, 0, 0, 1, 0, 0, 0],
-    [0, 0, 9, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 3, 0, 0],
-    [0, 0, 0, 0, 1, 0, 0, 0, 0],
-    [0, 6, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 5, 0],
-    [8, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 7, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 2],
+  [0, 0, 0, 0, 0, 1, 0, 0, 0],
+  [0, 0, 9, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 3, 0, 0],
+  [0, 0, 0, 0, 1, 0, 0, 0, 0],
+  [0, 6, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 5, 0],
+  [8, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 7, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 2],
 ];
 ```
 
 We need to develop those methods :
 
--   decimalToBinary(decimalNumber)
--   binaryToDecimal(binaryNumber)
--   setHasNumber(set, decimalNumber)
--   addNumberToSet(set,decimalNumber)
--   specificColumnHasNumber(columnNumber, decimalNumber)
--   specificRowHasNumber(RowNumber, decimalNumber)
--   specificSquareHasNumber(squareNumber, decimalNumber)
+- decimalToBinary(decimalNumber)
+- binaryToDecimal(binaryNumber)
+- setHasNumber(set, decimalNumber)
+- addNumberToSet(set,decimalNumber)
+- specificColumnHasNumber(columnNumber, decimalNumber)
+- specificRowHasNumber(RowNumber, decimalNumber)
+- specificSquareHasNumber(squareNumber, decimalNumber)
 
 13:42 : develop decimalToBinary(decimalNumber)
 
@@ -429,19 +429,19 @@ Create util.ts and utils.test.ts :
 
 ```javascript
 export function decimalToBinary(decimalNumber: number) {
-    return decimalNumber.toString(2).padStart(9, '0');
+  return decimalNumber.toString(2).padStart(9, "0");
 }
 ```
 
 ```javascript
-import { decimalToBinary } from './utils';
+import { decimalToBinary } from "./utils";
 
-test('decimalToBinary(256) to equals 100000000', () => {
-    expect(decimalToBinary(256)).toBe('100000000');
+test("decimalToBinary(256) to equals 100000000", () => {
+  expect(decimalToBinary(256)).toBe("100000000");
 });
 
-test('decimalToBinary(1) to equals 00000001', () => {
-    expect(decimalToBinary(1)).toBe('000000001');
+test("decimalToBinary(1) to equals 00000001", () => {
+  expect(decimalToBinary(1)).toBe("000000001");
 });
 ```
 
@@ -449,7 +449,7 @@ test('decimalToBinary(1) to equals 00000001', () => {
 
 ```javascript
 export function setHasNumber(set: number, number) {
-    return (set & number) === number;
+  return (set & number) === number;
 }
 ```
 
@@ -457,17 +457,17 @@ export function setHasNumber(set: number, number) {
 
 ```javascript
 export function binaryToDecimal(binaryNumber: string) {
-    return parseInt(binaryNumber, 2);
+  return parseInt(binaryNumber, 2);
 }
 ```
 
 ```javascript
 test('binaryToDecimal("000000001") to equal 1', () => {
-    expect(binaryToDecimal('000000001')).toBe(1);
+  expect(binaryToDecimal("000000001")).toBe(1);
 });
 
 test('binaryToDecimal("111110111") to equal 503', () => {
-    expect(binaryToDecimal('111110111')).toBe(503);
+  expect(binaryToDecimal("111110111")).toBe(503);
 });
 ```
 
@@ -482,37 +482,37 @@ renaming setHasNumber => binarySetHasNumber
 
 ```javascript
 export function decimalNumberToBinarySet(decimalNumber: number) {
-    return 1 << (decimalNumber - 1);
+  return 1 << (decimalNumber - 1);
 }
 ```
 
 ```javascript
-test('decimalNumberToBinarySet :  9 => 256 ', () => {
-    expect(decimalNumberToBinarySet(9)).toBe(256);
+test("decimalNumberToBinarySet :  9 => 256 ", () => {
+  expect(decimalNumberToBinarySet(9)).toBe(256);
 });
 ```
 
 14:40 back to binarySetHasNumber testing :
 
 ```javascript
-const binarySet = '111110111'; // <= has 9,8,7,6,5,3,2,1, 4 is missing
+const binarySet = "111110111"; // <= has 9,8,7,6,5,3,2,1, 4 is missing
 
-test('binarySetHasNumber :  111110111 & 4 to be false', () => {
-    expect(
-        binarySetHasNumber(
-            binarySetToDecimalSet(binarySet),
-            decimalNumberToBinarySet(4),
-        ),
-    ).toBe(false);
+test("binarySetHasNumber :  111110111 & 4 to be false", () => {
+  expect(
+    binarySetHasNumber(
+      binarySetToDecimalSet(binarySet),
+      decimalNumberToBinarySet(4)
+    )
+  ).toBe(false);
 });
 
-test('binarySetHasNumber :  111110111 & 7 to be true', () => {
-    expect(
-        binarySetHasNumber(
-            binarySetToDecimalSet(binarySet),
-            decimalNumberToBinarySet(7),
-        ),
-    ).toBe(true);
+test("binarySetHasNumber :  111110111 & 7 to be true", () => {
+  expect(
+    binarySetHasNumber(
+      binarySetToDecimalSet(binarySet),
+      decimalNumberToBinarySet(7)
+    )
+  ).toBe(true);
 });
 ```
 
@@ -520,20 +520,20 @@ test('binarySetHasNumber :  111110111 & 7 to be true', () => {
 
 ```javascript
 export function addDecimalNumberToDecimalSet(
-    decimalSet: number,
-    decimalNumber: number,
+  decimalSet: number,
+  decimalNumber: number
 ) {
-    return decimalSet | decimalNumberToBinarySet(decimalNumber);
+  return decimalSet | decimalNumberToBinarySet(decimalNumber);
 }
 ```
 
 ```javascript
-const emptyBinarySet = '00000000';
+const emptyBinarySet = "00000000";
 
-test('addDecimalNumberToDecimalSet(00000000,1) => 000000001', () => {
-    expect(
-        addDecimalNumberToDecimalSet(binarySetToDecimalSet(emptyBinarySet), 1),
-    ).toBe(binarySetToDecimalSet('000000001'));
+test("addDecimalNumberToDecimalSet(00000000,1) => 000000001", () => {
+  expect(
+    addDecimalNumberToDecimalSet(binarySetToDecimalSet(emptyBinarySet), 1)
+  ).toBe(binarySetToDecimalSet("000000001"));
 });
 ```
 
@@ -545,21 +545,21 @@ getMissingBinarySetFromeBinarySet(binarySet)
 
 ```javascript
 export function getMissingBinarySetFromBinarySet(binarySet: number) {
-    return binarySetToDecimalSet('111111111') & ~binarySet;
+  return binarySetToDecimalSet("111111111") & ~binarySet;
 }
 ```
 
 ```javascript
-test('getMissingBinarySetFromBinarySet(00000000) => 111111111', () => {
-    expect(
-        getMissingBinarySetFromBinarySet(binarySetToDecimalSet('00000000')),
-    ).toBe(binarySetToDecimalSet('111111111'));
+test("getMissingBinarySetFromBinarySet(00000000) => 111111111", () => {
+  expect(
+    getMissingBinarySetFromBinarySet(binarySetToDecimalSet("00000000"))
+  ).toBe(binarySetToDecimalSet("111111111"));
 });
 
-test('getMissingBinarySetFromBinarySet(111111111) => 0', () => {
-    expect(
-        getMissingBinarySetFromBinarySet(binarySetToDecimalSet('111111111')),
-    ).toBe(binarySetToDecimalSet('00000000'));
+test("getMissingBinarySetFromBinarySet(111111111) => 0", () => {
+  expect(
+    getMissingBinarySetFromBinarySet(binarySetToDecimalSet("111111111"))
+  ).toBe(binarySetToDecimalSet("00000000"));
 });
 ```
 
@@ -569,41 +569,41 @@ test('getMissingBinarySetFromBinarySet(111111111) => 0', () => {
 
 ```javascript
 export function binarySetToNumbersList(binarySet: number) {
-    return [1, 2, 3, 4, 5, 6, 7, 8, 9].filter((number) => {
-        if (binarySetHasNumber(binarySet, number)) {
-            return number;
-        }
-    });
+  return [1, 2, 3, 4, 5, 6, 7, 8, 9].filter((number) => {
+    if (binarySetHasNumber(binarySet, number)) {
+      return number;
+    }
+  });
 }
 ```
 
 ```javascript
-test('binarySetToNumbersList(111111111) => [1, 2, 3, 4, 5, 6, 7, 8, 9]', () => {
-    expect(binarySetToNumbersList(binarySetToDecimalSet('111111111'))).toEqual([
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-    ]);
+test("binarySetToNumbersList(111111111) => [1, 2, 3, 4, 5, 6, 7, 8, 9]", () => {
+  expect(binarySetToNumbersList(binarySetToDecimalSet("111111111"))).toEqual([
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+  ]);
 });
 
-test('binarySetToNumbersList(000000000) => []', () => {
-    expect(binarySetToNumbersList(binarySetToDecimalSet('000000000'))).toEqual(
-        [],
-    );
+test("binarySetToNumbersList(000000000) => []", () => {
+  expect(binarySetToNumbersList(binarySetToDecimalSet("000000000"))).toEqual(
+    []
+  );
 });
 ```
 
 16:48 : Time to develop the method to acces the Sudoku grid :
 
--   specificColumnHasNumber(columnNumber, decimalNumber)
--   specificRowHasNumber(RowNumber, decimalNumber)
--   specificSquareHasNumber(squareNumber, decimalNumber)
+- specificColumnHasNumber(columnNumber, decimalNumber)
+- specificRowHasNumber(RowNumber, decimalNumber)
+- specificSquareHasNumber(squareNumber, decimalNumber)
 
 16:51 It seems that some other functions are needed first to transform the grid into the different arrays
 
@@ -611,49 +611,39 @@ test('binarySetToNumbersList(000000000) => []', () => {
 
 ```javascript
 export function getRowsSetsFromGrid(grid) {
-    let rowsSets = [];
+  let rowsSets = [];
 
-    grid.forEach((row) => {
-        let decimalSet = 0;
+  grid.forEach((row) => {
+    let decimalSet = 0;
 
-        row.forEach((number) => {
-            if (number !== 0) {
-                decimalSet = addDecimalNumberToDecimalSet(decimalSet, number);
-            }
-        });
-
-        rowsSets.push(decimalSet);
+    row.forEach((number) => {
+      if (number !== 0) {
+        decimalSet = addDecimalNumberToDecimalSet(decimalSet, number);
+      }
     });
 
-    return rowsSets;
+    rowsSets.push(decimalSet);
+  });
+
+  return rowsSets;
 }
 ```
 
 ```javascript
 const grid = [
-    [0, 0, 0, 0, 0, 1, 0, 0, 0],
-    [0, 0, 9, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 3, 0, 0],
-    [0, 0, 0, 0, 1, 0, 0, 0, 0],
-    [0, 6, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 5, 0],
-    [8, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 7, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 2],
+  [0, 0, 0, 0, 0, 1, 0, 0, 0],
+  [0, 0, 9, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 3, 0, 0],
+  [0, 0, 0, 0, 1, 0, 0, 0, 0],
+  [0, 6, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 5, 0],
+  [8, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 7, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 2],
 ];
 
-test('getRowsSetsFromGrid should equals [1,256,4,1,32,16,128,64,2]', () => {
-    expect(getRowsSetsFromGrid(grid)).toEqual([
-        1,
-        256,
-        4,
-        1,
-        32,
-        16,
-        128,
-        64,
-        2,
-    ]);
+test("getRowsSetsFromGrid should equals [1,256,4,1,32,16,128,64,2]", () => {
+  expect(getRowsSetsFromGrid(grid)).toEqual([1, 256, 4, 1, 32, 16, 128, 64, 2]);
 });
 ```
 
@@ -661,50 +651,50 @@ getColumnsSetsFromGrid(grid)
 
 ```javascript
 export function getColumnsSetsFromGrid(grid) {
-    let columnSets = [];
+  let columnSets = [];
 
-    for (let i = 0; i < grid.length; i++) {
-        let decimalSet = 0;
+  for (let i = 0; i < grid.length; i++) {
+    let decimalSet = 0;
 
-        for (let j = 0; j < grid.length; j++) {
-            let number = grid[j][i];
+    for (let j = 0; j < grid.length; j++) {
+      let number = grid[j][i];
 
-            if (number !== 0) {
-                decimalSet = addDecimalNumberToDecimalSet(decimalSet, number);
-            }
-        }
-        columnSets.push(decimalSet);
+      if (number !== 0) {
+        decimalSet = addDecimalNumberToDecimalSet(decimalSet, number);
+      }
     }
+    columnSets.push(decimalSet);
+  }
 
-    return columnSets;
+  return columnSets;
 }
 ```
 
 ```javascript
 const grid = [
-    [0, 0, 0, 0, 0, 1, 0, 0, 0],
-    [0, 0, 9, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 3, 0, 0],
-    [0, 0, 0, 0, 1, 0, 0, 0, 0],
-    [0, 6, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 5, 0],
-    [8, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 7, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 2],
+  [0, 0, 0, 0, 0, 1, 0, 0, 0],
+  [0, 0, 9, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 3, 0, 0],
+  [0, 0, 0, 0, 1, 0, 0, 0, 0],
+  [0, 6, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 5, 0],
+  [8, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 7, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 2],
 ];
 
-test('getColumnsSetsFromGrid should equals [128,32,256,64,1,1,4,16,2]', () => {
-    expect(getColumnsSetsFromGrid(grid)).toEqual([
-        128,
-        32,
-        256,
-        64,
-        1,
-        1,
-        4,
-        16,
-        2,
-    ]);
+test("getColumnsSetsFromGrid should equals [128,32,256,64,1,1,4,16,2]", () => {
+  expect(getColumnsSetsFromGrid(grid)).toEqual([
+    128,
+    32,
+    256,
+    64,
+    1,
+    1,
+    4,
+    16,
+    2,
+  ]);
 });
 ```
 
@@ -714,93 +704,93 @@ test('getColumnsSetsFromGrid should equals [128,32,256,64,1,1,4,16,2]', () => {
 
 ```javascript
 export function getSquaresSetsFromGrid(grid) {
-    let squaresSet = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-    let squaresSetIndice = 0;
+  let squaresSet = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+  let squaresSetIndice = 0;
 
-    for (let i = 0; i < grid.length; i++) {
-        for (let j = 0; j < grid.length; j++) {
-            let number = grid[i][j];
-            squaresSetIndice = Math.floor(j / 3) + Math.floor(i / 3) * 3;
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid.length; j++) {
+      let number = grid[i][j];
+      squaresSetIndice = Math.floor(j / 3) + Math.floor(i / 3) * 3;
 
-            if (number !== 0) {
-                squaresSet[squaresSetIndice] = addDecimalNumberToDecimalSet(
-                    squaresSet[squaresSetIndice],
-                    number,
-                );
-            }
-        }
+      if (number !== 0) {
+        squaresSet[squaresSetIndice] = addDecimalNumberToDecimalSet(
+          squaresSet[squaresSetIndice],
+          number
+        );
+      }
     }
+  }
 
-    return squaresSet;
+  return squaresSet;
 }
 ```
 
 ```javascript
 const grid = [
-    [0, 0, 0, 0, 0, 1, 0, 0, 0],
-    [0, 0, 9, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 3, 0, 0],
-    [0, 0, 0, 0, 1, 0, 0, 0, 0],
-    [0, 6, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 5, 0],
-    [8, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 7, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 2],
+  [0, 0, 0, 0, 0, 1, 0, 0, 0],
+  [0, 0, 9, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 3, 0, 0],
+  [0, 0, 0, 0, 1, 0, 0, 0, 0],
+  [0, 6, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 5, 0],
+  [8, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 7, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 2],
 ];
 
-test('getSquaresSetsFromGrid should equals [256,1,4,32,1,16,128,64,2]', () => {
-    expect(getSquaresSetsFromGrid(grid)).toEqual([
-        256,
-        1,
-        4,
-        32,
-        1,
-        16,
-        128,
-        64,
-        2,
-    ]);
+test("getSquaresSetsFromGrid should equals [256,1,4,32,1,16,128,64,2]", () => {
+  expect(getSquaresSetsFromGrid(grid)).toEqual([
+    256,
+    1,
+    4,
+    32,
+    1,
+    16,
+    128,
+    64,
+    2,
+  ]);
 });
 ```
 
 17:56 : Ok, we can now go back to :
 
--   specificColumnHasNumber(columnNumber, decimalNumber)
--   specificRowHasNumber(RowNumber, decimalNumber)
--   specificSquareHasNumber(squareNumber, decimalNumber)
+- specificColumnHasNumber(columnNumber, decimalNumber)
+- specificRowHasNumber(RowNumber, decimalNumber)
+- specificSquareHasNumber(squareNumber, decimalNumber)
 
 18:07 :
 
 ```javascript
 export function specificColumnHasNumber(
-    columnsSets,
-    columnNumber: number,
-    decimalNumber: number,
+  columnsSets,
+  columnNumber: number,
+  decimalNumber: number
 ) {
-    return binarySetHasNumber(
-        columnsSets[columnNumber],
-        decimalNumberToBinarySet(decimalNumber),
-    );
+  return binarySetHasNumber(
+    columnsSets[columnNumber],
+    decimalNumberToBinarySet(decimalNumber)
+  );
 }
 ```
 
 ```javascript
 const grid = [
-    [0, 0, 0, 0, 0, 1, 0, 0, 0],
-    [0, 0, 9, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 3, 0, 0],
-    [0, 0, 0, 0, 1, 0, 0, 0, 0],
-    [0, 6, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 5, 0],
-    [8, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 7, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 2],
+  [0, 0, 0, 0, 0, 1, 0, 0, 0],
+  [0, 0, 9, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 3, 0, 0],
+  [0, 0, 0, 0, 1, 0, 0, 0, 0],
+  [0, 6, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 5, 0],
+  [8, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 7, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 2],
 ];
 
 const columnsSets = getColumnsSetsFromGrid(grid);
 
-test('specificColumnHasNumber(columnsSets,0,8) should equals true', () => {
-    expect(specificColumnHasNumber(columnsSets, 0, 8)).toEqual(true);
+test("specificColumnHasNumber(columnsSets,0,8) should equals true", () => {
+  expect(specificColumnHasNumber(columnsSets, 0, 8)).toEqual(true);
 });
 ```
 
@@ -808,34 +798,34 @@ test('specificColumnHasNumber(columnsSets,0,8) should equals true', () => {
 
 ```javascript
 export function specificRowHasNumber(
-    rowsSets,
-    rowNumber: number,
-    decimalNumber: number,
+  rowsSets,
+  rowNumber: number,
+  decimalNumber: number
 ) {
-    return binarySetHasNumber(
-        rowsSets[rowNumber],
-        decimalNumberToBinarySet(decimalNumber),
-    );
+  return binarySetHasNumber(
+    rowsSets[rowNumber],
+    decimalNumberToBinarySet(decimalNumber)
+  );
 }
 ```
 
 ```javascript
 const grid = [
-    [0, 0, 0, 0, 0, 1, 0, 0, 0],
-    [0, 0, 9, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 3, 0, 0],
-    [0, 0, 0, 0, 1, 0, 0, 0, 0],
-    [0, 6, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 5, 0],
-    [8, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 7, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 2],
+  [0, 0, 0, 0, 0, 1, 0, 0, 0],
+  [0, 0, 9, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 3, 0, 0],
+  [0, 0, 0, 0, 1, 0, 0, 0, 0],
+  [0, 6, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 5, 0],
+  [8, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 7, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 2],
 ];
 
 const rowsSets = getRowsSetsFromGrid(grid);
 
-test('specificColumnHasNumber(columnsSets,0,8) should equals true', () => {
-    expect(specificColumnHasNumber(columnsSets, 0, 8)).toEqual(true);
+test("specificColumnHasNumber(columnsSets,0,8) should equals true", () => {
+  expect(specificColumnHasNumber(columnsSets, 0, 8)).toEqual(true);
 });
 ```
 
@@ -843,34 +833,34 @@ test('specificColumnHasNumber(columnsSets,0,8) should equals true', () => {
 
 ```javascript
 export function specificSquareHasNumber(
-    squareSets,
-    squareNumber: number,
-    decimalNumber: number,
+  squareSets,
+  squareNumber: number,
+  decimalNumber: number
 ) {
-    return binarySetHasNumber(
-        squareSets[squareNumber],
-        decimalNumberToBinarySet(decimalNumber),
-    );
+  return binarySetHasNumber(
+    squareSets[squareNumber],
+    decimalNumberToBinarySet(decimalNumber)
+  );
 }
 ```
 
 ```javascript
 const grid = [
-    [0, 0, 0, 0, 0, 1, 0, 0, 0],
-    [0, 0, 9, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 3, 0, 0],
-    [0, 0, 0, 0, 1, 0, 0, 0, 0],
-    [0, 6, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 5, 0],
-    [8, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 7, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 2],
+  [0, 0, 0, 0, 0, 1, 0, 0, 0],
+  [0, 0, 9, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 3, 0, 0],
+  [0, 0, 0, 0, 1, 0, 0, 0, 0],
+  [0, 6, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 5, 0],
+  [8, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 7, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 2],
 ];
 
 const squaresSets = getSquaresSetsFromGrid(grid);
 
-test('specificSquareHasNumber(squaresSets,7,7) should equals true', () => {
-    expect(specificSquareHasNumber(squaresSets, 7, 7)).toEqual(true);
+test("specificSquareHasNumber(squaresSets,7,7) should equals true", () => {
+  expect(specificSquareHasNumber(squaresSets, 7, 7)).toEqual(true);
 });
 ```
 
@@ -882,21 +872,21 @@ First what we need is a method to merge multiple sets
 
 ```javascript
 export function mergeDecimalSets(
-    firstDecimalSets: number,
-    secondDecimalSets: number,
+  firstDecimalSets: number,
+  secondDecimalSets: number
 ) {
-    return firstDecimalSets | secondDecimalSets;
+  return firstDecimalSets | secondDecimalSets;
 }
 ```
 
 ```javascript
-let firstBinarySet = binarySetToDecimalSet('00000001');
-let secondBinarySet = binarySetToDecimalSet('10000000');
+let firstBinarySet = binarySetToDecimalSet("00000001");
+let secondBinarySet = binarySetToDecimalSet("10000000");
 
-test('mergeBinarySets(00000001,100000000) should equals 100000001', () => {
-    expect(mergeDecimalSets(firstBinarySet, secondBinarySet)).toEqual(
-        binarySetToDecimalSet('10000001'),
-    );
+test("mergeBinarySets(00000001,100000000) should equals 100000001", () => {
+  expect(mergeDecimalSets(firstBinarySet, secondBinarySet)).toEqual(
+    binarySetToDecimalSet("10000001")
+  );
 });
 ```
 
@@ -906,43 +896,43 @@ Now that we can merges sets we can retriev the tree set for a specific spot on a
 
 ```javascript
 export function getSetsForSpotOnGrid(
-    row,
-    column,
-    columnsSets,
-    rowsSets,
-    squaresSets,
+  row,
+  column,
+  columnsSets,
+  rowsSets,
+  squaresSets
 ) {
-    let squaresSetIndice = Math.floor(column / 3) + Math.floor(row / 3) * 3;
+  let squaresSetIndice = Math.floor(column / 3) + Math.floor(row / 3) * 3;
 
-    const squaresSet = squaresSets[squaresSetIndice];
-    const rowSet = rowsSets[row];
-    const columnSet = columnsSets[column];
+  const squaresSet = squaresSets[squaresSetIndice];
+  const rowSet = rowsSets[row];
+  const columnSet = columnsSets[column];
 
-    return mergeDecimalSets(mergeDecimalSets(squaresSet, rowSet), columnSet);
+  return mergeDecimalSets(mergeDecimalSets(squaresSet, rowSet), columnSet);
 }
 ```
 
 ```javascript
 const grid = [
-    [0, 0, 0, 0, 0, 1, 0, 0, 0],
-    [0, 0, 9, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 3, 0, 0],
-    [0, 0, 0, 0, 1, 0, 0, 0, 0],
-    [0, 6, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 5, 0],
-    [8, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 7, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 2],
+  [0, 0, 0, 0, 0, 1, 0, 0, 0],
+  [0, 0, 9, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 3, 0, 0],
+  [0, 0, 0, 0, 1, 0, 0, 0, 0],
+  [0, 6, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 5, 0],
+  [8, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 7, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 2],
 ];
 
 const columnsSets = getColumnsSetsFromGrid(grid);
 const rowsSets = getRowsSetsFromGrid(grid);
 const squaresSets = getSquaresSetsFromGrid(grid);
 
-test('getSetsForSpotOnGrid(4,0,columnsSets,rowsSets,squaresSets) should equals 010100000', () => {
-    expect(
-        getSetsForSpotOnGrid(4, 0, columnsSets, rowsSets, squaresSets),
-    ).toEqual(binarySetToDecimalSet('010100000'));
+test("getSetsForSpotOnGrid(4,0,columnsSets,rowsSets,squaresSets) should equals 010100000", () => {
+  expect(
+    getSetsForSpotOnGrid(4, 0, columnsSets, rowsSets, squaresSets)
+  ).toEqual(binarySetToDecimalSet("010100000"));
 });
 ```
 
@@ -956,43 +946,43 @@ I can now get a set of possible value for a specific spot :
 
 ```javascript
 const grid = [
-    [0, 0, 0, 0, 0, 1, 0, 0, 0],
-    [0, 0, 9, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 3, 0, 0],
-    [0, 0, 0, 0, 1, 0, 0, 0, 0],
-    [0, 6, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 5, 0],
-    [8, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 7, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 2],
+  [0, 0, 0, 0, 0, 1, 0, 0, 0],
+  [0, 0, 9, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 3, 0, 0],
+  [0, 0, 0, 0, 1, 0, 0, 0, 0],
+  [0, 6, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 5, 0],
+  [8, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 7, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 2],
 ];
 
 const columnsSets = getColumnsSetsFromGrid(grid);
 const rowsSets = getRowsSetsFromGrid(grid);
 const squaresSets = getSquaresSetsFromGrid(grid);
 
-test('Available number for spot grid[4][0] should be  [1,2,3,5,7,9]', () => {
-    const setsForSpotOnGrid = getSetsForSpotOnGrid(
-        4,
-        0,
-        columnsSets,
-        rowsSets,
-        squaresSets,
-    );
+test("Available number for spot grid[4][0] should be  [1,2,3,5,7,9]", () => {
+  const setsForSpotOnGrid = getSetsForSpotOnGrid(
+    4,
+    0,
+    columnsSets,
+    rowsSets,
+    squaresSets
+  );
 
-    const missingSetsForSpotOnGrid = getMissingBinarySetFromBinarySet(
-        setsForSpotOnGrid,
-    );
+  const missingSetsForSpotOnGrid = getMissingBinarySetFromBinarySet(
+    setsForSpotOnGrid
+  );
 
-    expect(decimalSetToNumbersList(missingSetsForSpotOnGrid)).toEqual([
-        1,
-        2,
-        3,
-        4,
-        5,
-        7,
-        9,
-    ]);
+  expect(decimalSetToNumbersList(missingSetsForSpotOnGrid)).toEqual([
+    1,
+    2,
+    3,
+    4,
+    5,
+    7,
+    9,
+  ]);
 });
 ```
 
@@ -1042,20 +1032,20 @@ Let's also create a CHANGELOG
 
 ```javascript
 export function displayGrid(grid) {
-    let gridToDisplay = '';
-    for (let i = 0; i < grid.length; i++) {
-        if (i % 3 === 0)
-            gridToDisplay += '  ----------------------------------' + '\n';
+  let gridToDisplay = "";
+  for (let i = 0; i < grid.length; i++) {
+    if (i % 3 === 0)
+      gridToDisplay += "  ----------------------------------" + "\n";
 
-        for (let j = 0; j < grid.length; j++) {
-            if (j % 3 === 0) gridToDisplay += ' | ';
-            gridToDisplay += ` ${grid[i][j]} `;
-        }
-        gridToDisplay += '| \n';
+    for (let j = 0; j < grid.length; j++) {
+      if (j % 3 === 0) gridToDisplay += " | ";
+      gridToDisplay += ` ${grid[i][j]} `;
     }
-    gridToDisplay += '  ----------------------------------' + '\n';
+    gridToDisplay += "| \n";
+  }
+  gridToDisplay += "  ----------------------------------" + "\n";
 
-    console.log(gridToDisplay);
+  console.log(gridToDisplay);
 }
 ```
 
@@ -1081,20 +1071,20 @@ displayGrid(grid);
 
 ```javascript
 export function displayGrid(grid) {
-    let gridToDisplay = '';
-    for (let i = 0; i < grid.length; i++) {
-        if (i % 3 === 0)
-            gridToDisplay += '  ----------------------------------' + '\n';
+  let gridToDisplay = "";
+  for (let i = 0; i < grid.length; i++) {
+    if (i % 3 === 0)
+      gridToDisplay += "  ----------------------------------" + "\n";
 
-        for (let j = 0; j < grid.length; j++) {
-            if (j % 3 === 0) gridToDisplay += ' | ';
-            gridToDisplay += ` ${grid[i][j] === 0 ? '-' : grid[i][j]} `;
-        }
-        gridToDisplay += '| \n';
+    for (let j = 0; j < grid.length; j++) {
+      if (j % 3 === 0) gridToDisplay += " | ";
+      gridToDisplay += ` ${grid[i][j] === 0 ? "-" : grid[i][j]} `;
     }
-    gridToDisplay += '  ----------------------------------' + '\n';
+    gridToDisplay += "| \n";
+  }
+  gridToDisplay += "  ----------------------------------" + "\n";
 
-    console.log(gridToDisplay);
+  console.log(gridToDisplay);
 }
 ```
 
@@ -1118,71 +1108,71 @@ displayGrid(grid);
 20:00 : Ok now let's try to add a number on the first spot : grid[0][0] :
 
 ```javascript
-test('try to add a number on first spot 0 0 ', () => {
-    const grid = [
-        [0, 0, 0, 0, 0, 1, 0, 0, 0],
-        [0, 0, 9, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 3, 0, 0],
-        [0, 0, 0, 0, 1, 0, 0, 0, 0],
-        [0, 6, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 5, 0],
-        [8, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 7, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 2],
-    ];
+test("try to add a number on first spot 0 0 ", () => {
+  const grid = [
+    [0, 0, 0, 0, 0, 1, 0, 0, 0],
+    [0, 0, 9, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 3, 0, 0],
+    [0, 0, 0, 0, 1, 0, 0, 0, 0],
+    [0, 6, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 5, 0],
+    [8, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 7, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 2],
+  ];
 
-    displayGrid(grid);
+  displayGrid(grid);
 
-    const i = 0;
-    const j = 0;
+  const i = 0;
+  const j = 0;
 
-    let columnsSets = getColumnsSetsFromGrid(grid);
-    let rowsSets = getRowsSetsFromGrid(grid);
-    let squaresSets = getSquaresSetsFromGrid(grid);
+  let columnsSets = getColumnsSetsFromGrid(grid);
+  let rowsSets = getRowsSetsFromGrid(grid);
+  let squaresSets = getSquaresSetsFromGrid(grid);
 
-    let setsForSpotOnGrid = getSetsForSpotOnGrid(
-        i,
-        j,
-        columnsSets,
-        rowsSets,
-        squaresSets,
-    );
+  let setsForSpotOnGrid = getSetsForSpotOnGrid(
+    i,
+    j,
+    columnsSets,
+    rowsSets,
+    squaresSets
+  );
 
-    let missingSetsForSpotOnGrid = getMissingBinarySetFromBinarySet(
-        setsForSpotOnGrid,
-    );
+  let missingSetsForSpotOnGrid = getMissingBinarySetFromBinarySet(
+    setsForSpotOnGrid
+  );
 
-    let listOfPossibilityForSpecificSpot = decimalSetToNumbersList(
-        missingSetsForSpotOnGrid,
-    );
+  let listOfPossibilityForSpecificSpot = decimalSetToNumbersList(
+    missingSetsForSpotOnGrid
+  );
 
-    expect(listOfPossibilityForSpecificSpot).toEqual([2, 3, 4, 5, 6, 7]);
+  expect(listOfPossibilityForSpecificSpot).toEqual([2, 3, 4, 5, 6, 7]);
 
-    grid[i][j] = listOfPossibilityForSpecificSpot[0];
+  grid[i][j] = listOfPossibilityForSpecificSpot[0];
 
-    displayGrid(grid);
+  displayGrid(grid);
 
-    columnsSets = getColumnsSetsFromGrid(grid);
-    rowsSets = getRowsSetsFromGrid(grid);
-    squaresSets = getSquaresSetsFromGrid(grid);
+  columnsSets = getColumnsSetsFromGrid(grid);
+  rowsSets = getRowsSetsFromGrid(grid);
+  squaresSets = getSquaresSetsFromGrid(grid);
 
-    setsForSpotOnGrid = getSetsForSpotOnGrid(
-        i,
-        j,
-        columnsSets,
-        rowsSets,
-        squaresSets,
-    );
+  setsForSpotOnGrid = getSetsForSpotOnGrid(
+    i,
+    j,
+    columnsSets,
+    rowsSets,
+    squaresSets
+  );
 
-    missingSetsForSpotOnGrid = getMissingBinarySetFromBinarySet(
-        setsForSpotOnGrid,
-    );
+  missingSetsForSpotOnGrid = getMissingBinarySetFromBinarySet(
+    setsForSpotOnGrid
+  );
 
-    listOfPossibilityForSpecificSpot = decimalSetToNumbersList(
-        missingSetsForSpotOnGrid,
-    );
+  listOfPossibilityForSpecificSpot = decimalSetToNumbersList(
+    missingSetsForSpotOnGrid
+  );
 
-    expect(listOfPossibilityForSpecificSpot).toEqual([3, 4, 5, 6, 7]);
+  expect(listOfPossibilityForSpecificSpot).toEqual([3, 4, 5, 6, 7]);
 });
 ```
 
@@ -1224,48 +1214,48 @@ Next step 3 iterations :
 20:12
 
 ```javascript
-test('try to add a number on first 3 spots', () => {
-    const grid = [
-        [0, 0, 0, 0, 0, 1, 0, 0, 0],
-        [0, 0, 9, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 3, 0, 0],
-        [0, 0, 0, 0, 1, 0, 0, 0, 0],
-        [0, 6, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 5, 0],
-        [8, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 7, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 2],
-    ];
+test("try to add a number on first 3 spots", () => {
+  const grid = [
+    [0, 0, 0, 0, 0, 1, 0, 0, 0],
+    [0, 0, 9, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 3, 0, 0],
+    [0, 0, 0, 0, 1, 0, 0, 0, 0],
+    [0, 6, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 5, 0],
+    [8, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 7, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 2],
+  ];
 
-    const i = 0;
+  const i = 0;
 
-    for (let j = 0; j < 3; j++) {
-        if (grid[i][j] !== 0) break;
+  for (let j = 0; j < 3; j++) {
+    if (grid[i][j] !== 0) break;
 
-        let columnsSets = getColumnsSetsFromGrid(grid);
-        let rowsSets = getRowsSetsFromGrid(grid);
-        let squaresSets = getSquaresSetsFromGrid(grid);
+    let columnsSets = getColumnsSetsFromGrid(grid);
+    let rowsSets = getRowsSetsFromGrid(grid);
+    let squaresSets = getSquaresSetsFromGrid(grid);
 
-        let setsForSpotOnGrid = getSetsForSpotOnGrid(
-            i,
-            j,
-            columnsSets,
-            rowsSets,
-            squaresSets,
-        );
+    let setsForSpotOnGrid = getSetsForSpotOnGrid(
+      i,
+      j,
+      columnsSets,
+      rowsSets,
+      squaresSets
+    );
 
-        let missingSetsForSpotOnGrid = getMissingBinarySetFromBinarySet(
-            setsForSpotOnGrid,
-        );
+    let missingSetsForSpotOnGrid = getMissingBinarySetFromBinarySet(
+      setsForSpotOnGrid
+    );
 
-        let listOfPossibilityForSpecificSpot = decimalSetToNumbersList(
-            missingSetsForSpotOnGrid,
-        );
+    let listOfPossibilityForSpecificSpot = decimalSetToNumbersList(
+      missingSetsForSpotOnGrid
+    );
 
-        grid[i][j] = listOfPossibilityForSpecificSpot[0];
+    grid[i][j] = listOfPossibilityForSpecificSpot[0];
 
-        displayGrid(grid);
-    }
+    displayGrid(grid);
+  }
 });
 ```
 
@@ -1337,48 +1327,48 @@ if (grid[i][j] !== 0) continue;
 20:14 : IT WOOORKS !!!
 
 ```javascript
-test('try to add a number on first line ', () => {
-    const grid = [
-        [0, 0, 0, 0, 0, 1, 0, 0, 0],
-        [0, 0, 9, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 3, 0, 0],
-        [0, 0, 0, 0, 1, 0, 0, 0, 0],
-        [0, 6, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 5, 0],
-        [8, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 7, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 2],
-    ];
+test("try to add a number on first line ", () => {
+  const grid = [
+    [0, 0, 0, 0, 0, 1, 0, 0, 0],
+    [0, 0, 9, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 3, 0, 0],
+    [0, 0, 0, 0, 1, 0, 0, 0, 0],
+    [0, 6, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 5, 0],
+    [8, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 7, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 2],
+  ];
 
-    const i = 0;
+  const i = 0;
 
-    for (let j = 0; j < grid.length; j++) {
-        if (grid[i][j] !== 0) continue;
+  for (let j = 0; j < grid.length; j++) {
+    if (grid[i][j] !== 0) continue;
 
-        let columnsSets = getColumnsSetsFromGrid(grid);
-        let rowsSets = getRowsSetsFromGrid(grid);
-        let squaresSets = getSquaresSetsFromGrid(grid);
+    let columnsSets = getColumnsSetsFromGrid(grid);
+    let rowsSets = getRowsSetsFromGrid(grid);
+    let squaresSets = getSquaresSetsFromGrid(grid);
 
-        let setsForSpotOnGrid = getSetsForSpotOnGrid(
-            i,
-            j,
-            columnsSets,
-            rowsSets,
-            squaresSets,
-        );
+    let setsForSpotOnGrid = getSetsForSpotOnGrid(
+      i,
+      j,
+      columnsSets,
+      rowsSets,
+      squaresSets
+    );
 
-        let missingSetsForSpotOnGrid = getMissingBinarySetFromBinarySet(
-            setsForSpotOnGrid,
-        );
+    let missingSetsForSpotOnGrid = getMissingBinarySetFromBinarySet(
+      setsForSpotOnGrid
+    );
 
-        let listOfPossibilityForSpecificSpot = decimalSetToNumbersList(
-            missingSetsForSpotOnGrid,
-        );
+    let listOfPossibilityForSpecificSpot = decimalSetToNumbersList(
+      missingSetsForSpotOnGrid
+    );
 
-        grid[i][j] = listOfPossibilityForSpecificSpot[0];
+    grid[i][j] = listOfPossibilityForSpecificSpot[0];
 
-        displayGrid(grid);
-    }
+    displayGrid(grid);
+  }
 });
 ```
 
@@ -1509,48 +1499,48 @@ test('try to add a number on first line ', () => {
 20:18 : Let's go, now all the grid !
 
 ```javascript
-test('try to add a number on all the grid', () => {
-    const grid = [
-        [0, 0, 0, 0, 0, 1, 0, 0, 0],
-        [0, 0, 9, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 3, 0, 0],
-        [0, 0, 0, 0, 1, 0, 0, 0, 0],
-        [0, 6, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 5, 0],
-        [8, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 7, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 2],
-    ];
+test("try to add a number on all the grid", () => {
+  const grid = [
+    [0, 0, 0, 0, 0, 1, 0, 0, 0],
+    [0, 0, 9, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 3, 0, 0],
+    [0, 0, 0, 0, 1, 0, 0, 0, 0],
+    [0, 6, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 5, 0],
+    [8, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 7, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 2],
+  ];
 
-    for (let i = 0; i < grid.length; i++) {
-        for (let j = 0; j < grid.length; j++) {
-            if (grid[i][j] !== 0) continue;
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid.length; j++) {
+      if (grid[i][j] !== 0) continue;
 
-            let columnsSets = getColumnsSetsFromGrid(grid);
-            let rowsSets = getRowsSetsFromGrid(grid);
-            let squaresSets = getSquaresSetsFromGrid(grid);
+      let columnsSets = getColumnsSetsFromGrid(grid);
+      let rowsSets = getRowsSetsFromGrid(grid);
+      let squaresSets = getSquaresSetsFromGrid(grid);
 
-            let setsForSpotOnGrid = getSetsForSpotOnGrid(
-                i,
-                j,
-                columnsSets,
-                rowsSets,
-                squaresSets,
-            );
+      let setsForSpotOnGrid = getSetsForSpotOnGrid(
+        i,
+        j,
+        columnsSets,
+        rowsSets,
+        squaresSets
+      );
 
-            let missingSetsForSpotOnGrid = getMissingBinarySetFromBinarySet(
-                setsForSpotOnGrid,
-            );
+      let missingSetsForSpotOnGrid = getMissingBinarySetFromBinarySet(
+        setsForSpotOnGrid
+      );
 
-            let listOfPossibilityForSpecificSpot = decimalSetToNumbersList(
-                missingSetsForSpotOnGrid,
-            );
+      let listOfPossibilityForSpecificSpot = decimalSetToNumbersList(
+        missingSetsForSpotOnGrid
+      );
 
-            grid[i][j] = listOfPossibilityForSpecificSpot[0];
+      grid[i][j] = listOfPossibilityForSpecificSpot[0];
 
-            displayGrid(grid);
-        }
+      displayGrid(grid);
     }
+  }
 });
 ```
 
@@ -1602,54 +1592,54 @@ IT WOOORKS !!
 
 ```javascript
 export function resolveOneIteration(grid) {
-    for (let i = 0; i < grid.length; i++) {
-        for (let j = 0; j < grid.length; j++) {
-            if (grid[i][j] !== 0) continue;
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid.length; j++) {
+      if (grid[i][j] !== 0) continue;
 
-            let columnsSets = getColumnsSetsFromGrid(grid);
-            let rowsSets = getRowsSetsFromGrid(grid);
-            let squaresSets = getSquaresSetsFromGrid(grid);
+      let columnsSets = getColumnsSetsFromGrid(grid);
+      let rowsSets = getRowsSetsFromGrid(grid);
+      let squaresSets = getSquaresSetsFromGrid(grid);
 
-            let setsForSpotOnGrid = getSetsForSpotOnGrid(
-                i,
-                j,
-                columnsSets,
-                rowsSets,
-                squaresSets,
-            );
+      let setsForSpotOnGrid = getSetsForSpotOnGrid(
+        i,
+        j,
+        columnsSets,
+        rowsSets,
+        squaresSets
+      );
 
-            let missingSetsForSpotOnGrid = getMissingBinarySetFromBinarySet(
-                setsForSpotOnGrid,
-            );
+      let missingSetsForSpotOnGrid = getMissingBinarySetFromBinarySet(
+        setsForSpotOnGrid
+      );
 
-            let listOfPossibilityForSpecificSpot = decimalSetToNumbersList(
-                missingSetsForSpotOnGrid,
-            );
+      let listOfPossibilityForSpecificSpot = decimalSetToNumbersList(
+        missingSetsForSpotOnGrid
+      );
 
-            if (!listOfPossibilityForSpecificSpot.length) continue;
+      if (!listOfPossibilityForSpecificSpot.length) continue;
 
-            grid[i][j] = listOfPossibilityForSpecificSpot[0];
-        }
+      grid[i][j] = listOfPossibilityForSpecificSpot[0];
     }
-    displayGrid(grid);
+  }
+  displayGrid(grid);
 }
 ```
 
 ```javascript
-test('try to add a number on all the grid line ', () => {
-    const grid = [
-        [0, 0, 0, 0, 0, 1, 0, 0, 0],
-        [0, 0, 9, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 3, 0, 0],
-        [0, 0, 0, 0, 1, 0, 0, 0, 0],
-        [0, 6, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 5, 0],
-        [8, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 7, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 2],
-    ];
+test("try to add a number on all the grid line ", () => {
+  const grid = [
+    [0, 0, 0, 0, 0, 1, 0, 0, 0],
+    [0, 0, 9, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 3, 0, 0],
+    [0, 0, 0, 0, 1, 0, 0, 0, 0],
+    [0, 6, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 5, 0],
+    [8, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 7, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 2],
+  ];
 
-    resolveOneIteration(grid);
+  resolveOneIteration(grid);
 });
 ```
 
@@ -1674,22 +1664,22 @@ Ok, still working !
 20:28 : Remove display grid from function
 
 ```javascript
-test('try to add a number on all the grid line ', () => {
-    const grid = [
-        [0, 0, 0, 0, 0, 1, 0, 0, 0],
-        [0, 0, 9, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 3, 0, 0],
-        [0, 0, 0, 0, 1, 0, 0, 0, 0],
-        [0, 6, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 5, 0],
-        [8, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 7, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 2],
-    ];
+test("try to add a number on all the grid line ", () => {
+  const grid = [
+    [0, 0, 0, 0, 0, 1, 0, 0, 0],
+    [0, 0, 9, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 3, 0, 0],
+    [0, 0, 0, 0, 1, 0, 0, 0, 0],
+    [0, 6, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 5, 0],
+    [8, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 7, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 2],
+  ];
 
-    resolveOneIteration(grid);
+  resolveOneIteration(grid);
 
-    displayGrid(grid);
+  displayGrid(grid);
 });
 ```
 
@@ -1727,22 +1717,22 @@ For the moment we try to add the first possibility for each spot, eahc time we t
 Let's first try with an easy grid, with less possibilities :
 
 ```javascript
-test('try to add a number on all the grid line ', () => {
-    const grid = [
-        [3, 0, 0, 2, 0, 1, 0, 0, 0],
-        [7, 4, 0, 0, 0, 0, 0, 1, 9],
-        [0, 2, 0, 0, 6, 0, 5, 0, 0],
-        [0, 3, 0, 7, 4, 0, 0, 0, 1],
-        [0, 0, 8, 0, 0, 0, 9, 0, 0],
-        [6, 0, 0, 0, 9, 2, 0, 5, 0],
-        [0, 0, 2, 0, 8, 0, 0, 4, 0],
-        [1, 5, 0, 0, 0, 0, 0, 9, 7],
-        [0, 0, 0, 9, 0, 3, 0, 0, 2],
-    ];
+test("try to add a number on all the grid line ", () => {
+  const grid = [
+    [3, 0, 0, 2, 0, 1, 0, 0, 0],
+    [7, 4, 0, 0, 0, 0, 0, 1, 9],
+    [0, 2, 0, 0, 6, 0, 5, 0, 0],
+    [0, 3, 0, 7, 4, 0, 0, 0, 1],
+    [0, 0, 8, 0, 0, 0, 9, 0, 0],
+    [6, 0, 0, 0, 9, 2, 0, 5, 0],
+    [0, 0, 2, 0, 8, 0, 0, 4, 0],
+    [1, 5, 0, 0, 0, 0, 0, 9, 7],
+    [0, 0, 0, 9, 0, 3, 0, 0, 2],
+  ];
 
-    resolveOneIteration(grid);
+  resolveOneIteration(grid);
 
-    displayGrid(grid);
+  displayGrid(grid);
 });
 ```
 
@@ -1773,24 +1763,24 @@ if (listOfPossibilityForSpecificSpot.length !== 1) continue;
 ```
 
 ```javascript
-test('try to add a number on all the grid line ', () => {
-    const grid = [
-        [0, 6, 0, 0, 0, 0, 0, 1, 0],
-        [0, 0, 0, 6, 5, 1, 0, 0, 0],
-        [1, 0, 7, 0, 0, 0, 6, 0, 2],
-        [6, 2, 0, 3, 0, 5, 0, 9, 4],
-        [0, 0, 3, 0, 0, 0, 2, 0, 0],
-        [4, 8, 0, 9, 0, 7, 0, 3, 6],
-        [9, 0, 6, 0, 0, 0, 4, 0, 8],
-        [0, 0, 0, 7, 9, 4, 0, 0, 0],
-        [0, 5, 0, 0, 0, 0, 0, 7, 0],
-    ];
+test("try to add a number on all the grid line ", () => {
+  const grid = [
+    [0, 6, 0, 0, 0, 0, 0, 1, 0],
+    [0, 0, 0, 6, 5, 1, 0, 0, 0],
+    [1, 0, 7, 0, 0, 0, 6, 0, 2],
+    [6, 2, 0, 3, 0, 5, 0, 9, 4],
+    [0, 0, 3, 0, 0, 0, 2, 0, 0],
+    [4, 8, 0, 9, 0, 7, 0, 3, 6],
+    [9, 0, 6, 0, 0, 0, 4, 0, 8],
+    [0, 0, 0, 7, 9, 4, 0, 0, 0],
+    [0, 5, 0, 0, 0, 0, 0, 7, 0],
+  ];
 
-    displayGrid(grid);
+  displayGrid(grid);
 
-    resolveOneIteration(grid);
+  resolveOneIteration(grid);
 
-    displayGrid(grid);
+  displayGrid(grid);
 });
 ```
 
@@ -1833,24 +1823,24 @@ After
 20:53 : Ok and with multiple itteration ? let's try with 10 iterations
 
 ```javascript
-test('try to add a number on all the grid line ', () => {
-    const grid = [
-        [0, 6, 0, 0, 0, 0, 0, 1, 0],
-        [0, 0, 0, 6, 5, 1, 0, 0, 0],
-        [1, 0, 7, 0, 0, 0, 6, 0, 2],
-        [6, 2, 0, 3, 0, 5, 0, 9, 4],
-        [0, 0, 3, 0, 0, 0, 2, 0, 0],
-        [4, 8, 0, 9, 0, 7, 0, 3, 6],
-        [9, 0, 6, 0, 0, 0, 4, 0, 8],
-        [0, 0, 0, 7, 9, 4, 0, 0, 0],
-        [0, 5, 0, 0, 0, 0, 0, 7, 0],
-    ];
+test("try to add a number on all the grid line ", () => {
+  const grid = [
+    [0, 6, 0, 0, 0, 0, 0, 1, 0],
+    [0, 0, 0, 6, 5, 1, 0, 0, 0],
+    [1, 0, 7, 0, 0, 0, 6, 0, 2],
+    [6, 2, 0, 3, 0, 5, 0, 9, 4],
+    [0, 0, 3, 0, 0, 0, 2, 0, 0],
+    [4, 8, 0, 9, 0, 7, 0, 3, 6],
+    [9, 0, 6, 0, 0, 0, 4, 0, 8],
+    [0, 0, 0, 7, 9, 4, 0, 0, 0],
+    [0, 5, 0, 0, 0, 0, 0, 7, 0],
+  ];
 
-    for (let i = 0; i < 9; i++) {
-        displayGrid(grid);
+  for (let i = 0; i < 9; i++) {
+    displayGrid(grid);
 
-        resolveOneIteration(grid);
-    }
+    resolveOneIteration(grid);
+  }
 });
 ```
 
@@ -1891,9 +1881,9 @@ IT WORKS !!!
 
 21:00 : Enough for today :
 
--   Test if the grid is Full & loop until it's full
+- Test if the grid is Full & loop until it's full
 
--   Test if the grid is incorrect : no mor possibilities to stop the loop
+- Test if the grid is incorrect : no mor possibilities to stop the loop
 
 23:25 : Working on noMorePossibilities
 
@@ -1901,85 +1891,85 @@ IT WORKS !!!
 
 ```javascript
 export function hasMorePossibilities(grid) {
-    let morePossibilities = false;
+  let morePossibilities = false;
 
-    for (let i = 0; i < grid.length; i++) {
-        for (let j = 0; j < grid.length; j++) {
-            if (grid[i][j] !== 0) continue;
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid.length; j++) {
+      if (grid[i][j] !== 0) continue;
 
-            let columnsSets = getColumnsSetsFromGrid(grid);
-            let rowsSets = getRowsSetsFromGrid(grid);
-            let squaresSets = getSquaresSetsFromGrid(grid);
+      let columnsSets = getColumnsSetsFromGrid(grid);
+      let rowsSets = getRowsSetsFromGrid(grid);
+      let squaresSets = getSquaresSetsFromGrid(grid);
 
-            let setsForSpotOnGrid = getSetsForSpotOnGrid(
-                i,
-                j,
-                columnsSets,
-                rowsSets,
-                squaresSets,
-            );
+      let setsForSpotOnGrid = getSetsForSpotOnGrid(
+        i,
+        j,
+        columnsSets,
+        rowsSets,
+        squaresSets
+      );
 
-            let missingSetsForSpotOnGrid = getMissingBinarySetFromBinarySet(
-                setsForSpotOnGrid,
-            );
+      let missingSetsForSpotOnGrid = getMissingBinarySetFromBinarySet(
+        setsForSpotOnGrid
+      );
 
-            let listOfPossibilityForSpecificSpot = decimalSetToNumbersList(
-                missingSetsForSpotOnGrid,
-            );
+      let listOfPossibilityForSpecificSpot = decimalSetToNumbersList(
+        missingSetsForSpotOnGrid
+      );
 
-            morePossibilities = listOfPossibilityForSpecificSpot.length !== 0;
-        }
+      morePossibilities = listOfPossibilityForSpecificSpot.length !== 0;
     }
+  }
 
-    return morePossibilities;
+  return morePossibilities;
 }
 ```
 
 ```javascript
-test('try to add a number on all the grid line ', () => {
-    const grid = [
-        [0, 6, 0, 0, 0, 0, 0, 1, 0],
-        [0, 0, 0, 6, 5, 1, 0, 0, 0],
-        [1, 0, 7, 0, 0, 0, 6, 0, 2],
-        [6, 2, 0, 3, 0, 5, 0, 9, 4],
-        [0, 0, 3, 0, 0, 0, 2, 0, 0],
-        [4, 8, 0, 9, 0, 7, 0, 3, 6],
-        [9, 0, 6, 0, 0, 0, 4, 0, 8],
-        [0, 0, 0, 7, 9, 4, 0, 0, 0],
-        [0, 5, 0, 0, 0, 0, 0, 7, 0],
-    ];
+test("try to add a number on all the grid line ", () => {
+  const grid = [
+    [0, 6, 0, 0, 0, 0, 0, 1, 0],
+    [0, 0, 0, 6, 5, 1, 0, 0, 0],
+    [1, 0, 7, 0, 0, 0, 6, 0, 2],
+    [6, 2, 0, 3, 0, 5, 0, 9, 4],
+    [0, 0, 3, 0, 0, 0, 2, 0, 0],
+    [4, 8, 0, 9, 0, 7, 0, 3, 6],
+    [9, 0, 6, 0, 0, 0, 4, 0, 8],
+    [0, 0, 0, 7, 9, 4, 0, 0, 0],
+    [0, 5, 0, 0, 0, 0, 0, 7, 0],
+  ];
 
-    displayGrid(grid);
+  displayGrid(grid);
 
-    while (hasMorePossibilities(grid)) {
-        resolveOneIteration(grid);
-    }
-    displayGrid(grid);
+  while (hasMorePossibilities(grid)) {
+    resolveOneIteration(grid);
+  }
+  displayGrid(grid);
 });
 ```
 
 Works if only one solution but infinity loop if multiple ones
 
 ```javascript
-test('try to add a number on all the grid line ', () => {
-    const grid = [
-        [0, 0, 0, 0, 0, 1, 0, 0, 0],
-        [0, 0, 9, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 3, 0, 0],
-        [0, 0, 0, 0, 1, 0, 0, 0, 0],
-        [0, 6, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 5, 0],
-        [8, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 7, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 2],
-    ];
+test("try to add a number on all the grid line ", () => {
+  const grid = [
+    [0, 0, 0, 0, 0, 1, 0, 0, 0],
+    [0, 0, 9, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 3, 0, 0],
+    [0, 0, 0, 0, 1, 0, 0, 0, 0],
+    [0, 6, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 5, 0],
+    [8, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 7, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 2],
+  ];
 
+  displayGrid(grid);
+
+  while (hasMorePossibilities(grid)) {
+    resolveOneIteration(grid);
     displayGrid(grid);
-
-    while (hasMorePossibilities(grid)) {
-        resolveOneIteration(grid);
-        displayGrid(grid);
-    }
+  }
 });
 ```
 
@@ -2009,122 +1999,118 @@ I lost so much time working on a grid with too much possibilities, I thought my 
 
 ```javascript
 export function hasEmptySpot(grid) {
-    for (let i = 0; i < grid.length; i++) {
-        for (let j = 0; j < grid.length; j++) {
-            if (grid[i][j] === 0) {
-                return true;
-            }
-        }
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid.length; j++) {
+      if (grid[i][j] === 0) {
+        return true;
+      }
     }
+  }
 
-    return false;
+  return false;
 }
 
 export function bestSpotWithFewerPossibility(grid) {
-    if (!hasEmptySpot(grid)) {
-        return [-1, -1];
-    }
+  if (!hasEmptySpot(grid)) {
+    return [-1, -1];
+  }
 
-    let amountOfPossibilities = 20;
-    let row = -1;
-    let column = -1;
+  let amountOfPossibilities = 20;
+  let row = -1;
+  let column = -1;
 
-    for (let i = 0; i < grid.length; i++) {
-        for (let j = 0; j < grid.length; j++) {
-            if (grid[i][j] !== 0) continue;
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid.length; j++) {
+      if (grid[i][j] !== 0) continue;
 
-            let columnsSets = getColumnsSetsFromGrid(grid);
-            let rowsSets = getRowsSetsFromGrid(grid);
-            let squaresSets = getSquaresSetsFromGrid(grid);
+      let columnsSets = getColumnsSetsFromGrid(grid);
+      let rowsSets = getRowsSetsFromGrid(grid);
+      let squaresSets = getSquaresSetsFromGrid(grid);
 
-            let setsForSpotOnGrid = getSetsForSpotOnGrid(
-                i,
-                j,
-                columnsSets,
-                rowsSets,
-                squaresSets,
-            );
-
-            let missingSetsForSpotOnGrid = getMissingBinarySetFromBinarySet(
-                setsForSpotOnGrid,
-            );
-
-            let listOfPossibilityForSpecificSpot = decimalSetToNumbersList(
-                missingSetsForSpotOnGrid,
-            );
-
-            if (listOfPossibilityForSpecificSpot.length === 1) {
-                return [i, j];
-            } else {
-                if (
-                    amountOfPossibilities >
-                    listOfPossibilityForSpecificSpot.length
-                ) {
-                    amountOfPossibilities =
-                        listOfPossibilityForSpecificSpot.length;
-                    column = j;
-                    row = i;
-                }
-            }
-        }
-    }
-
-    return [row, column];
-}
-
-export function resolve(grid) {
-    const [i, j] = bestSpotWithFewerPossibility(grid);
-
-    if (i === -1 && j === -1) {
-        displayGrid(grid);
-        return;
-    }
-
-    let columnsSets = getColumnsSetsFromGrid(grid);
-    let rowsSets = getRowsSetsFromGrid(grid);
-    let squaresSets = getSquaresSetsFromGrid(grid);
-
-    let setsForSpotOnGrid = getSetsForSpotOnGrid(
+      let setsForSpotOnGrid = getSetsForSpotOnGrid(
         i,
         j,
         columnsSets,
         rowsSets,
-        squaresSets,
-    );
+        squaresSets
+      );
 
-    let missingSetsForSpotOnGrid = getMissingBinarySetFromBinarySet(
-        setsForSpotOnGrid,
-    );
+      let missingSetsForSpotOnGrid = getMissingBinarySetFromBinarySet(
+        setsForSpotOnGrid
+      );
 
-    let listOfPossibilityForSpecificSpot = decimalSetToNumbersList(
-        missingSetsForSpotOnGrid,
-    );
+      let listOfPossibilityForSpecificSpot = decimalSetToNumbersList(
+        missingSetsForSpotOnGrid
+      );
 
-    listOfPossibilityForSpecificSpot.forEach((possibility) => {
-        const newGrid = _.cloneDeep(grid);
+      if (listOfPossibilityForSpecificSpot.length === 1) {
+        return [i, j];
+      } else {
+        if (amountOfPossibilities > listOfPossibilityForSpecificSpot.length) {
+          amountOfPossibilities = listOfPossibilityForSpecificSpot.length;
+          column = j;
+          row = i;
+        }
+      }
+    }
+  }
 
-        newGrid[i][j] = possibility;
+  return [row, column];
+}
 
-        return resolve(newGrid);
-    });
+export function resolve(grid) {
+  const [i, j] = bestSpotWithFewerPossibility(grid);
+
+  if (i === -1 && j === -1) {
+    displayGrid(grid);
+    return;
+  }
+
+  let columnsSets = getColumnsSetsFromGrid(grid);
+  let rowsSets = getRowsSetsFromGrid(grid);
+  let squaresSets = getSquaresSetsFromGrid(grid);
+
+  let setsForSpotOnGrid = getSetsForSpotOnGrid(
+    i,
+    j,
+    columnsSets,
+    rowsSets,
+    squaresSets
+  );
+
+  let missingSetsForSpotOnGrid = getMissingBinarySetFromBinarySet(
+    setsForSpotOnGrid
+  );
+
+  let listOfPossibilityForSpecificSpot = decimalSetToNumbersList(
+    missingSetsForSpotOnGrid
+  );
+
+  listOfPossibilityForSpecificSpot.forEach((possibility) => {
+    const newGrid = _.cloneDeep(grid);
+
+    newGrid[i][j] = possibility;
+
+    return resolve(newGrid);
+  });
 }
 ```
 
 ```javascript
-test('resolve', () => {
-    const grid = [
-        [0, 0, 0, 6, 0, 0, 0, 2, 0],
-        [8, 0, 1, 0, 0, 7, 9, 0, 0],
-        [6, 0, 0, 0, 0, 4, 1, 0, 0],
-        [0, 0, 5, 0, 0, 8, 0, 0, 0],
-        [0, 2, 8, 5, 6, 0, 4, 0, 3],
-        [0, 0, 0, 0, 0, 0, 0, 8, 0],
-        [0, 0, 0, 0, 9, 0, 0, 0, 7],
-        [0, 0, 0, 7, 0, 0, 0, 1, 0],
-        [1, 5, 0, 0, 0, 0, 0, 0, 4],
-    ];
+test("resolve", () => {
+  const grid = [
+    [0, 0, 0, 6, 0, 0, 0, 2, 0],
+    [8, 0, 1, 0, 0, 7, 9, 0, 0],
+    [6, 0, 0, 0, 0, 4, 1, 0, 0],
+    [0, 0, 5, 0, 0, 8, 0, 0, 0],
+    [0, 2, 8, 5, 6, 0, 4, 0, 3],
+    [0, 0, 0, 0, 0, 0, 0, 8, 0],
+    [0, 0, 0, 0, 9, 0, 0, 0, 7],
+    [0, 0, 0, 7, 0, 0, 0, 1, 0],
+    [1, 5, 0, 0, 0, 0, 0, 0, 4],
+  ];
 
-    resolve(grid);
+  resolve(grid);
 });
 ```
 
@@ -2145,20 +2131,20 @@ test('resolve', () => {
 ```
 
 ```javascript
-test('resolve', () => {
-    const grid = [
-        [0, 0, 0, 6, 0, 0, 0, 2, 0],
-        [8, 0, 1, 0, 0, 7, 9, 0, 0],
-        [0, 0, 0, 0, 0, 4, 1, 0, 0], // <= removed the first 6
-        [0, 0, 5, 0, 0, 8, 0, 0, 0],
-        [0, 2, 8, 5, 6, 0, 4, 0, 3],
-        [0, 0, 0, 0, 0, 0, 0, 8, 0],
-        [0, 0, 0, 0, 9, 0, 0, 0, 7],
-        [0, 0, 0, 7, 0, 0, 0, 1, 0],
-        [1, 5, 0, 0, 0, 0, 0, 0, 4],
-    ];
+test("resolve", () => {
+  const grid = [
+    [0, 0, 0, 6, 0, 0, 0, 2, 0],
+    [8, 0, 1, 0, 0, 7, 9, 0, 0],
+    [0, 0, 0, 0, 0, 4, 1, 0, 0], // <= removed the first 6
+    [0, 0, 5, 0, 0, 8, 0, 0, 0],
+    [0, 2, 8, 5, 6, 0, 4, 0, 3],
+    [0, 0, 0, 0, 0, 0, 0, 8, 0],
+    [0, 0, 0, 0, 9, 0, 0, 0, 7],
+    [0, 0, 0, 7, 0, 0, 0, 1, 0],
+    [1, 5, 0, 0, 0, 0, 0, 0, 4],
+  ];
 
-    resolve(grid);
+  resolve(grid);
 });
 ```
 
@@ -2228,20 +2214,20 @@ And resovle only test with all the possibilities
 
 ```javascript
 export function resolve(grid) {
-    const [i, j, possibilities] = bestSpotWithFewerPossibility(grid);
+  const [i, j, possibilities] = bestSpotWithFewerPossibility(grid);
 
-    if (i === -1 && j === -1) {
-        displayGrid(grid);
-        return;
-    }
+  if (i === -1 && j === -1) {
+    displayGrid(grid);
+    return;
+  }
 
-    possibilities.forEach((possibility) => {
-        const newGrid = _.cloneDeep(grid);
+  possibilities.forEach((possibility) => {
+    const newGrid = _.cloneDeep(grid);
 
-        newGrid[i][j] = possibility;
+    newGrid[i][j] = possibility;
 
-        return resolve(newGrid);
-    });
+    return resolve(newGrid);
+  });
 }
 ```
 
@@ -2249,15 +2235,15 @@ Little benchmark with this grid :
 
 ```javascript
 const grid = [
-    [0, 0, 0, 6, 0, 0, 0, 2, 0],
-    [8, 0, 1, 0, 0, 7, 9, 0, 0],
-    [0, 0, 0, 0, 0, 4, 1, 0, 0],
-    [0, 0, 0, 0, 0, 8, 0, 0, 0],
-    [0, 2, 8, 5, 6, 0, 4, 0, 3],
-    [0, 0, 0, 0, 0, 0, 0, 8, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 7],
-    [0, 0, 0, 7, 0, 0, 0, 1, 0],
-    [1, 0, 0, 0, 0, 0, 0, 0, 4],
+  [0, 0, 0, 6, 0, 0, 0, 2, 0],
+  [8, 0, 1, 0, 0, 7, 9, 0, 0],
+  [0, 0, 0, 0, 0, 4, 1, 0, 0],
+  [0, 0, 0, 0, 0, 8, 0, 0, 0],
+  [0, 2, 8, 5, 6, 0, 4, 0, 3],
+  [0, 0, 0, 0, 0, 0, 0, 8, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 7],
+  [0, 0, 0, 7, 0, 0, 0, 1, 0],
+  [1, 0, 0, 0, 0, 0, 0, 0, 4],
 ];
 
 const before = Date.now();
@@ -2293,21 +2279,21 @@ So 1 second less !!!!
 
 ```javascript
 export function resolve(grid, result) {
-    const [i, j, possibilities] = bestSpotWithFewerPossibility(grid);
+  const [i, j, possibilities] = bestSpotWithFewerPossibility(grid);
 
-    if (i === -1 && j === -1) {
-        //displayGrid(grid);
-        result.push(grid);
-        return;
-    }
+  if (i === -1 && j === -1) {
+    //displayGrid(grid);
+    result.push(grid);
+    return;
+  }
 
-    possibilities.forEach((possibility) => {
-        const newGrid = _.cloneDeep(grid);
+  possibilities.forEach((possibility) => {
+    const newGrid = _.cloneDeep(grid);
 
-        newGrid[i][j] = possibility;
+    newGrid[i][j] = possibility;
 
-        return resolve(newGrid, result);
-    });
+    return resolve(newGrid, result);
+  });
 }
 ```
 
@@ -2315,15 +2301,15 @@ Same benshmark :
 
 ```javascript
 const grid = [
-    [0, 0, 0, 6, 0, 0, 0, 2, 0],
-    [8, 0, 1, 0, 0, 7, 9, 0, 0],
-    [0, 0, 0, 0, 0, 4, 1, 0, 0],
-    [0, 0, 0, 0, 0, 8, 0, 0, 0],
-    [0, 2, 8, 5, 6, 0, 4, 0, 3],
-    [0, 0, 0, 0, 0, 0, 0, 8, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 7],
-    [0, 0, 0, 7, 0, 0, 0, 1, 0],
-    [1, 0, 0, 0, 0, 0, 0, 0, 4],
+  [0, 0, 0, 6, 0, 0, 0, 2, 0],
+  [8, 0, 1, 0, 0, 7, 9, 0, 0],
+  [0, 0, 0, 0, 0, 4, 1, 0, 0],
+  [0, 0, 0, 0, 0, 8, 0, 0, 0],
+  [0, 2, 8, 5, 6, 0, 4, 0, 3],
+  [0, 0, 0, 0, 0, 0, 0, 8, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 7],
+  [0, 0, 0, 7, 0, 0, 0, 1, 0],
+  [1, 0, 0, 0, 0, 0, 0, 0, 4],
 ];
 
 const result = [];
@@ -2357,16 +2343,16 @@ yarn add --dev parcel-bundler
 
 ```html
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>Sudoku App</title>
-    </head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Sudoku App</title>
+  </head>
 
-    <body>
-        Hello world!
-    </body>
+  <body>
+    Hello world!
+  </body>
 </html>
 ```
 
@@ -2416,15 +2402,15 @@ Server running at http://localhost:1234
 10:52 : let's now add some js
 
 ```javascript
-console.log('HELLO');
+console.log("HELLO");
 ```
 
 Add the javascript to index.html :
 
 ```html
 <body>
-    Hello world!
-    <script src="index.js"></script>
+  Hello world!
+  <script src="index.js"></script>
 </body>
 ```
 
@@ -2502,18 +2488,18 @@ yarn add react react-dom
 
 ```html
 <body>
-    <div id="root"></div>
-    <script src="index.js"></script>
+  <div id="root"></div>
+  <script src="index.js"></script>
 </body>
 ```
 
 Change index.js :
 
 ```javascript
-import React from 'react';
-import { render } from 'react-dom';
+import React from "react";
+import { render } from "react-dom";
 
-render(<div>Hello world from React!</div>, document.querySelector('#root'));
+render(<div>Hello world from React!</div>, document.querySelector("#root"));
 ```
 
 ```bash
@@ -2615,8 +2601,8 @@ Change index.html :
 
 ```html
 <body>
-    <div id="root"></div>
-    <script src="index.tsx"></script>
+  <div id="root"></div>
+  <script src="index.tsx"></script>
 </body>
 ```
 
@@ -2626,7 +2612,7 @@ Change index.html :
 
 ```javascript
 function sum(firstParam: number, secondParam: number) {
-    return firstParam + secondParam;
+  return firstParam + secondParam;
 }
 
 console.log(sum(3, 4));
@@ -2681,25 +2667,25 @@ Change to package.json :
 index.tsx :
 
 ```javascript
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Title = styled.h1`
-    font-size: 1.5em;
-    text-align: center;
-    color: palevioletred;
+  font-size: 1.5em;
+  text-align: center;
+  color: palevioletred;
 `;
 
 // Create a Wrapper component that'll render a <section> tag with some styles
 const Wrapper = styled.section`
-    padding: 4em;
-    background: papayawhip;
+  padding: 4em;
+  background: papayawhip;
 `;
 
 render(
-    <Wrapper>
-        <Title>Hello World!</Title>
-    </Wrapper>,
-    document.querySelector('#root'),
+  <Wrapper>
+    <Title>Hello World!</Title>
+  </Wrapper>,
+  document.querySelector("#root")
 );
 ```
 
@@ -2722,10 +2708,10 @@ Create a Grid.tsx && Grid.stories.tsx :
 ```javascript
 // Grid.tsx
 
-import React from 'react';
+import React from "react";
 
 const Grid = () => {
-    return <div>GRID</div>;
+  return <div>GRID</div>;
 };
 
 export default Grid;
@@ -2734,15 +2720,15 @@ export default Grid;
 ```javascript
 // Grid.stories.tsx
 
-import React from 'react';
+import React from "react";
 
-import Grid from './Grid';
+import Grid from "./Grid";
 
 export const GridStory = () => <Grid />;
 
 export default {
-    title: 'Grid',
-    component: Grid,
+  title: "Grid",
+  component: Grid,
 };
 ```
 
@@ -2779,7 +2765,7 @@ Storybook need it's own .babelrc :
 // .storybook/.babelrc
 
 {
-    "presets": ["@babel/preset-env", "@babel/preset-react"]
+  "presets": ["@babel/preset-env", "@babel/preset-react"]
 }
 ```
 
@@ -2788,7 +2774,7 @@ It works now ....
 12:12 : Another error :
 
 ```javascript
-import React from 'react';
+import React from "react";
 ```
 
 creates an error :
@@ -2801,24 +2787,155 @@ copy paste tsconfig.json file from another project :
 
 ```json
 {
-    "compilerOptions": {
-        "target": "es6",
-        "lib": ["dom", "dom.iterable", "esnext"],
-        "allowJs": true,
-        "skipLibCheck": true,
-        "esModuleInterop": true,
-        "allowSyntheticDefaultImports": true,
-        "forceConsistentCasingInFileNames": true,
-        "module": "esnext",
-        "moduleResolution": "node",
-        "resolveJsonModule": true,
-        "isolatedModules": true,
-        "noEmit": true,
-        "jsx": "react",
-        "strict": false
-    },
-    "include": ["src"]
+  "compilerOptions": {
+    "target": "es6",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react",
+    "strict": false
+  },
+  "include": ["src"]
 }
 ```
 
 it works now
+
+12:16 : OK NOW WE CAN START !!! 2h to have a working environment ^^
+
+Changed Grid.tsx to
+
+```javascript
+interface GridProps {
+  grid: number[][];
+}
+
+const Grid = ({ grid }: GridProps) => {
+  return <div>GRID</div>;
+};
+```
+
+ERROR from storybook :
+
+```bash
+ERROR in ./src/Component/Grid.tsx
+Module build failed (from ./node_modules/@storybook/core/node_modules/babel-loader/lib/index.js):
+SyntaxError: /Users/amaury/Documents/AE/sudoku/src/Component/Grid.tsx: Unexpected reserved word 'interface' (3:0)
+
+  1 | import React from 'react';
+  2 |
+> 3 | interface GridProps {
+    | ^
+  4 |     grid: number[][];
+  5 | }
+```
+
+12:56 OMG no wonder I use creat-react-app ....
+
+I followed https://www.npmjs.com/package/@storybook/preset-typescript but still not working
+
+```bash
+Identifier 'React' has already been declared (7:7)
+```
+
+12:51 : time for a break .... And maybe time to use create-react-app to avoid all this bullshit !! My god that's exactly why a switched to create react app, 3 to 4 hour and nothing written just some configuration ... WHY !!!!????
+
+13:20 : OK, enough of this, time to use create react app
+
+```bash
+yarn create react-app sudoku-react --template typescript
+```
+
+```bash
+cd sudoku-react/
+```
+
+```bash
+yarn add typescript @types/node @types/react @types/react-dom @types/jest
+```
+
+```bash
+yarn add styled-components @types/styled-components
+```
+
+```
+npx sb init
+```
+
+remove ./src/stories directory
+
+create Grid.tsx && Grid.stories.tsx
+
+```javascript
+//Grid.tsx
+import React from "react";
+import styled from "styled-components";
+
+const Title = styled.h1`
+  font-size: 1.5em;
+  text-align: center;
+  color: palevioletred;
+`;
+
+// Create a Wrapper component that'll render a <section> tag with some styles
+const Wrapper = styled.section`
+  padding: 4em;
+  background: papayawhip;
+`;
+
+interface GridProps {
+  grid: number[][];
+}
+
+const Grid = ({ grid }: GridProps) => {
+  return (
+    <Wrapper>
+      <Title>Hello World!</Title>
+      <div>GRID</div>
+    </Wrapper>
+  );
+};
+
+export default Grid;
+```
+
+```javascript
+//Grid.stories.tsx
+
+import React from "react";
+
+import Grid from "./Grid";
+
+const grid = [
+  [0, 0, 0, 6, 0, 0, 0, 2, 0],
+  [8, 0, 1, 0, 0, 7, 9, 0, 0],
+  [0, 0, 0, 0, 0, 4, 1, 0, 0],
+  [0, 0, 0, 0, 0, 8, 0, 0, 0],
+  [0, 2, 8, 5, 6, 0, 4, 0, 3],
+  [0, 0, 0, 0, 0, 0, 0, 8, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 7],
+  [0, 0, 0, 7, 0, 0, 0, 1, 0],
+  [1, 0, 0, 0, 0, 0, 0, 0, 4],
+];
+
+export const GridStory = () => <Grid grid={grid} />;
+
+export default {
+  title: "Grid",
+  component: GridStory,
+};
+```
+
+13:30 : And it WOOORKS !!!
+
+Add a directory for the utils functions to resovle sudoku, clean all AND ...
+
+14:06 : BAM I can finally work on the UI
