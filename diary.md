@@ -2955,3 +2955,9 @@ It's only in ASCII art for now, time to make a better grid :
 - Can solve the grid each number at a time
 - Stop if the grid has multiple solutions
 - Display an error message and tell if the value added manually is in the row / colum / square
+
+18:23 I am really not happy with the UI
+
+Let's make from scratch a grid in css
+
+19:02 : New css for responsive grid done
