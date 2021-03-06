@@ -2961,3 +2961,5 @@ It's only in ASCII art for now, time to make a better grid :
 Let's make from scratch a grid in css
 
 19:02 : New css for responsive grid done
+
+20:40 : It's still not perfect but a little better, more responsive

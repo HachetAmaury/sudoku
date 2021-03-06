@@ -234,7 +234,7 @@ export function bestSpotWithFewerPossibility (grid:number[][]):[i:number, j:numb
   return [row, column, possibilities];
 }
 
-export function listOfPossibilityForSpecificSpot(grid: GridType, i:number, j:number) {
+export function listOfPossibilityForSpecificSpot(grid: GridType, i:number, j:number):number[] {
   let columnsSets = getColumnsSetsFromGrid(grid);
   let rowsSets = getRowsSetsFromGrid(grid);
   let squaresSets = getSquaresSetsFromGrid(grid);
