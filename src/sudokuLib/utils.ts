@@ -34,6 +34,7 @@ export function getMissingBinarySetFromBinarySet(binarySet: number) {
 }
 
 export function decimalSetToNumbersList(decimalSet: number) {
+  // eslint-disable-next-line 
   return [1, 2, 3, 4, 5, 6, 7, 8, 9].filter((number) => {
     if (decimalSetHasNumber(decimalSet, number)) {
       return number;
@@ -153,8 +154,11 @@ export function displayGrid(grid: GridType) {
 export function displayGridStr(grid: GridType) {
   let gridToDisplay = "";
   for (let i = 0; i < grid.length; i++) {
-    if (i % 3 === 0)
+    if (i % 3 === 0){
+
+      // eslint-disable-next-line 
       gridToDisplay += "  ----------------------------------" + "\n";
+    }
 
     for (let j = 0; j < grid.length; j++) {
       if (j % 3 === 0) gridToDisplay += " | ";
@@ -162,6 +166,7 @@ export function displayGridStr(grid: GridType) {
     }
     gridToDisplay += "| \n";
   }
+  // eslint-disable-next-line 
   gridToDisplay += "  ----------------------------------" + "\n";
 
   return gridToDisplay;

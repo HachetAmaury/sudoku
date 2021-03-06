@@ -1,11 +1,9 @@
-import { wait } from "@testing-library/dom";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import {
   bestSpotWithFewerPossibility,
   decimalSetHasNumber,
-  displayGridStr,
   getColumnsSetsFromGrid,
   getRowsSetsFromGrid,
   getSquaresSetsFromGrid,
@@ -112,7 +110,7 @@ const Grid = () => {
 
     let possibilitiesTemp = listOfPossibilityForSpecificSpot(grid, row, column);
 
-    if (value !== 0 && possibilitiesTemp.indexOf(value) == -1) {
+    if (value !== 0 && possibilitiesTemp.indexOf(value) === -1) {
       let error = "Error ";
 
       let columnsSets = getColumnsSetsFromGrid(grid);
