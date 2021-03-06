@@ -2705,4 +2705,6 @@ render(
 
 It works !!!
 
-11:40 :
+11:40 : OK So everything is ready we can start : let's create a componenet to display a grid :
+
+Create a ./src directory and move index.tsx and index.html + update package.json
