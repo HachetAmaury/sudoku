@@ -2198,3 +2198,91 @@ test('resolve', () => {
 03:21 : So I started at 12:00, made 4h of pause so I managed to do it in less than 12 hours !!!
 
 The next step is the UI, but for now time to sleep :)
+
+09:40 : Time to optimize it, resolve should not have to refind the possibilities, it was already computed in bestSpotWithFewerPossibility, bestSpotWithFewerPossibility should return i,j and the possibilities
+
+10:00 : IT WOORKS !!
+
+bestSpotWithFewerPossibility now return the row, column AND possibilities array for the best spot
+
+```javascript
+
+export function bestSpotWithFewerPossibility(grid) {
+    ...
+    let row = -1;
+    let column = -1;
+    let possibilities;
+...
+            if (listOfPossibilityForSpecificSpot.length === 1) {
+                return [i, j, listOfPossibilityForSpecificSpot];
+          ...
+                    row = i;
+                    column = j;
+                    possibilities = listOfPossibilityForSpecificSpot;
+             ...
+    return [row, column, possibilities];
+}
+```
+
+And resovle only test with all the possibilities
+
+```javascript
+export function resolve(grid) {
+    const [i, j, possibilities] = bestSpotWithFewerPossibility(grid);
+
+    if (i === -1 && j === -1) {
+        displayGrid(grid);
+        return;
+    }
+
+    possibilities.forEach((possibility) => {
+        const newGrid = _.cloneDeep(grid);
+
+        newGrid[i][j] = possibility;
+
+        return resolve(newGrid);
+    });
+}
+```
+
+Little benchmark with this grid :
+
+```javascript
+const grid = [
+    [0, 0, 0, 6, 0, 0, 0, 2, 0],
+    [8, 0, 1, 0, 0, 7, 9, 0, 0],
+    [0, 0, 0, 0, 0, 4, 1, 0, 0],
+    [0, 0, 0, 0, 0, 8, 0, 0, 0],
+    [0, 2, 8, 5, 6, 0, 4, 0, 3],
+    [0, 0, 0, 0, 0, 0, 0, 8, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 7],
+    [0, 0, 0, 7, 0, 0, 0, 1, 0],
+    [1, 0, 0, 0, 0, 0, 0, 0, 4],
+];
+
+const before = Date.now();
+
+resolve(grid);
+
+const after = Date.now() - before;
+
+console.log(after);
+```
+
+Old algorithm :
+
+```bash
+13914
+13897
+13959
+```
+
+New Algorithm :
+
+```bash
+12793
+12745
+12881
+```
+
+So 1 second less !!!!

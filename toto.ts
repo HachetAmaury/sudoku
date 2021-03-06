@@ -44,7 +44,14 @@ const grid = [
 ];
 
 const result = [];
+
+const before = Date.now();
+
 resolve(grid);
+
+const after = Date.now() - before;
+
+console.log(after);
 
 // const result = [];
 // resolveOneIteration(grid, result);

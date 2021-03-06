@@ -172,12 +172,13 @@ export function hasEmptySpot(grid) {
 
 export function bestSpotWithFewerPossibility(grid) {
     if (!hasEmptySpot(grid)) {
-        return [-1, -1];
+        return [-1, -1, []];
     }
 
     let amountOfPossibilities = 20;
     let row = -1;
     let column = -1;
+    let possibilities;
 
     for (let i = 0; i < grid.length; i++) {
         for (let j = 0; j < grid.length; j++) {
@@ -204,7 +205,7 @@ export function bestSpotWithFewerPossibility(grid) {
             );
 
             if (listOfPossibilityForSpecificSpot.length === 1) {
-                return [i, j];
+                return [i, j, listOfPossibilityForSpecificSpot];
             } else {
                 if (
                     amountOfPossibilities >
@@ -212,45 +213,26 @@ export function bestSpotWithFewerPossibility(grid) {
                 ) {
                     amountOfPossibilities =
                         listOfPossibilityForSpecificSpot.length;
-                    column = j;
                     row = i;
+                    column = j;
+                    possibilities = listOfPossibilityForSpecificSpot;
                 }
             }
         }
     }
 
-    return [row, column];
+    return [row, column, possibilities];
 }
 
 export function resolve(grid) {
-    const [i, j] = bestSpotWithFewerPossibility(grid);
+    const [i, j, possibilities] = bestSpotWithFewerPossibility(grid);
 
     if (i === -1 && j === -1) {
         displayGrid(grid);
         return;
     }
 
-    let columnsSets = getColumnsSetsFromGrid(grid);
-    let rowsSets = getRowsSetsFromGrid(grid);
-    let squaresSets = getSquaresSetsFromGrid(grid);
-
-    let setsForSpotOnGrid = getSetsForSpotOnGrid(
-        i,
-        j,
-        columnsSets,
-        rowsSets,
-        squaresSets,
-    );
-
-    let missingSetsForSpotOnGrid = getMissingBinarySetFromBinarySet(
-        setsForSpotOnGrid,
-    );
-
-    let listOfPossibilityForSpecificSpot = decimalSetToNumbersList(
-        missingSetsForSpotOnGrid,
-    );
-
-    listOfPossibilityForSpecificSpot.forEach((possibility) => {
+    possibilities.forEach((possibility) => {
         const newGrid = _.cloneDeep(grid);
 
         newGrid[i][j] = possibility;
