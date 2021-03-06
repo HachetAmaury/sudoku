@@ -2286,3 +2286,61 @@ New Algorithm :
 ```
 
 So 1 second less !!!!
+
+10:10 : Now it's time to add the result array to store all the valide grids
+
+10:18 : result added :
+
+```javascript
+export function resolve(grid, result) {
+    const [i, j, possibilities] = bestSpotWithFewerPossibility(grid);
+
+    if (i === -1 && j === -1) {
+        //displayGrid(grid);
+        result.push(grid);
+        return;
+    }
+
+    possibilities.forEach((possibility) => {
+        const newGrid = _.cloneDeep(grid);
+
+        newGrid[i][j] = possibility;
+
+        return resolve(newGrid, result);
+    });
+}
+```
+
+Same benshmark :
+
+```javascript
+const grid = [
+    [0, 0, 0, 6, 0, 0, 0, 2, 0],
+    [8, 0, 1, 0, 0, 7, 9, 0, 0],
+    [0, 0, 0, 0, 0, 4, 1, 0, 0],
+    [0, 0, 0, 0, 0, 8, 0, 0, 0],
+    [0, 2, 8, 5, 6, 0, 4, 0, 3],
+    [0, 0, 0, 0, 0, 0, 0, 8, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 7],
+    [0, 0, 0, 7, 0, 0, 0, 1, 0],
+    [1, 0, 0, 0, 0, 0, 0, 0, 4],
+];
+
+const result = [];
+
+const before = Date.now();
+
+resolve(grid, result);
+
+const after = Date.now() - before;
+
+console.log(`Computed ${result.length + 1} results in ${after} milliseconds`);
+```
+
+```bash
+Computed 91573 results in 13056 milliseconds
+Computed 91573 results in 13544 milliseconds
+Computed 91573 results in 13619 milliseconds
+```
+
+... So adding the result array slow the algorithm, at half a second to a full second

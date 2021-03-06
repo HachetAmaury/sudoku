@@ -392,6 +392,8 @@ test('find best Spot With Fewer Possibility', () => {
 });
 
 test('resolve', () => {
+    const result = [];
+
     const grid = [
         [0, 0, 0, 6, 0, 0, 0, 2, 0],
         [8, 0, 1, 0, 0, 7, 9, 0, 0],
@@ -404,5 +406,11 @@ test('resolve', () => {
         [1, 5, 0, 0, 0, 0, 0, 0, 4],
     ];
 
-    resolve(grid);
+    resolve(grid, result);
+
+    result.map((grid, indice) => {
+        console.log('Result ', indice);
+
+        displayGrid(grid);
+    });
 });

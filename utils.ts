@@ -224,11 +224,12 @@ export function bestSpotWithFewerPossibility(grid) {
     return [row, column, possibilities];
 }
 
-export function resolve(grid) {
+export function resolve(grid, result) {
     const [i, j, possibilities] = bestSpotWithFewerPossibility(grid);
 
     if (i === -1 && j === -1) {
-        displayGrid(grid);
+        //displayGrid(grid);
+        result.push(grid);
         return;
     }
 
@@ -237,6 +238,6 @@ export function resolve(grid) {
 
         newGrid[i][j] = possibility;
 
-        return resolve(newGrid);
+        return resolve(newGrid, result);
     });
 }
