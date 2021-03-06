@@ -2344,3 +2344,302 @@ Computed 91573 results in 13619 milliseconds
 ```
 
 ... So adding the result array slow the algorithm, at half a second to a full second
+
+10:33 It's time to add the UI, later this code will be added to a lib inside a react app but for now let's create the app in another directory :
+
+10:41 : Actually let's try to create a React app with Parcel
+
+```bash
+yarn add --dev parcel-bundler
+```
+
+10:43 : Ok now let's create an index.html :
+
+```html
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Sudoku App</title>
+    </head>
+
+    <body>
+        Hello world!
+    </body>
+</html>
+```
+
+Add Parcel command to package.json :
+
+```json
+    "start": "parcel index.html --open"
+```
+
+Execute parcel :
+
+```bash
+yarn start
+```
+
+ERROR
+
+```bash
+yarn run v1.22.4
+$ parcel --open
+Server running at http://localhost:1234
+🚨  No entries found.
+```
+
+10:50 :
+
+... strange, I have to tell parel to use index.html
+
+```json
+    "start": "parcel index.html --open"
+```
+
+Execute parcel :
+
+```bash
+yarn start
+```
+
+And it works
+
+```
+$ parcel index.html --open
+Server running at http://localhost:1234
+✨  Built in 47ms.
+```
+
+10:52 : let's now add some js
+
+```javascript
+console.log('HELLO');
+```
+
+Add the javascript to index.html :
+
+```html
+<body>
+    Hello world!
+    <script src="index.js"></script>
+</body>
+```
+
+10:55 : ERROR :
+
+```bash
+Server running at http://localhost:1234
+🚨  ... index.js: Invalid Version: undefined
+```
+
+.... https://stackoverflow.com/questions/66459081/parcel-semver-bug :
+
+It is a well-known problem in the newest version of Parcel.
+
+The solution of this problem was to revert back to version 1.12.3, or by updating to the version 2 of Parcel. You can do the first solution by:
+
+```html
+npm uninstall parcel-bundler npm i --save-dev parcel-bundler@1.12.3
+```
+
+The second solution could be done like this:
+
+```html
+npm i --save-dev parcel@next
+```
+
+ok ... let's try
+
+```bash
+yarn add --dev parcel@next
+```
+
+NOPE :
+
+```bash
+Server running at http://localhost:1234
+🚨  ... index.js: Invalid Version: undefined
+```
+
+second try :
+
+```bash
+yarn remove parcel-bundler
+yarn add  --dev parcel-bundler@1.12.3
+```
+
+Yeaaah ... it works ...
+
+```bash
+Server running at http://localhost:1234
+✨  Built in 21ms.
+```
+
+11:03 : Ok now let's prepare for React :
+
+crete .babelrc :
+
+```
+{ "presets": ["env", "react"] }
+```
+
+Ajout des presets pour react et le JSX:
+
+```bash
+yarn add --dev babel-preset-env babel-preset-react
+```
+
+Installation de react :
+
+```bash
+yarn add react react-dom
+```
+
+11:05 : Change index.html :
+
+```html
+<body>
+    <div id="root"></div>
+    <script src="index.js"></script>
+</body>
+```
+
+Change index.js :
+
+```javascript
+import React from 'react';
+import { render } from 'react-dom';
+
+render(<div>Hello world from React!</div>, document.querySelector('#root'));
+```
+
+```bash
+yarn start
+```
+
+```bash
+$ parcel index.html --open
+Server running at http://localhost:1234
+✨  Built in 2.44s.
+```
+
+And in the browser :
+
+```
+Hello world from React !
+```
+
+11:08 let's try to build for prod :
+
+change to package.json :
+
+```json
+        "build": "parcel build"
+```
+
+```bash
+yarn build
+```
+
+ERROR
+
+```bash
+$ parcel build
+🚨  No entries found.
+    at Bundler.bundle
+```
+
+.... Still have to tell Parcel to use index.html
+
+change to package.json :
+
+```json
+        "build": "parcel build index.html"
+```
+
+```bash
+yarn build
+```
+
+```bash
+yarn run v1.22.4
+$ parcel build index.html
+✨  Built in 3.24s.
+
+dist/sudoku.57828944.js.map    267.88 KB     38ms
+dist/sudoku.57828944.js        129.34 KB    2.24s
+dist/index.html                    292 B    923ms
+✨  Done in 4.38s.
+```
+
+Let's try to serve the build :
+
+```bash
+ http-server ./dist/
+```
+
+```bash
+Starting up http-server, serving ./dist/
+Available on:
+ http://127.0.0.1:8080
+ http://192.168.0.165:8080
+Hit CTRL-C to stop the server
+[2021-03-06T10:12:20.994Z] "GET /" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
+(node:49938) [DEP0066] DeprecationWarning: OutgoingMessage.prototype._headers is deprecated
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[2021-03-06T10:12:21.026Z] "GET /sudoku.57828944.js" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
+[2021-03-06T10:12:21.068Z] "GET /favicon.ico" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
+[2021-03-06T10:12:21.070Z] "GET /favicon.ico" Error (404): "Not found"
+
+```
+
+11:14 : Ok it's working .... but what about typescript :D
+
+let's create a tsconfig file :
+
+```bash
+// tsconfig.json
+{
+  "compilerOptions": {
+    "jsx": "react"
+  }
+}
+```
+
+change extensions from index.js to index.tsx and change import in index.html :
+
+Change index.html :
+
+```html
+<body>
+    <div id="root"></div>
+    <script src="index.tsx"></script>
+</body>
+```
+
+11:20 Add a "React not found" ERROR ... remove .cache directory and restart, it works
+
+11:27 : test Typescript in index.tsx :
+
+```javascript
+function sum(firstParam: number, secondParam: number) {
+    return firstParam + secondParam;
+}
+
+console.log(sum(3, 4));
+```
+
+it works "7" dispaly in browser console
+
+11:28 : Change .gitignore : add .cache & dist
+
+```bash
+.DS_Store
+node_modules
+.vscode
+.cache
+dist
+```
