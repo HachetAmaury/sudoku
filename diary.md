@@ -2708,3 +2708,117 @@ It works !!!
 11:40 : OK So everything is ready we can start : let's create a componenet to display a grid :
 
 Create a ./src directory and move index.tsx and index.html + update package.json
+
+11:45 : Install storybook :
+
+```
+npx sb init
+```
+
+Remove unused files installed by storybook
+
+Create a Grid.tsx && Grid.stories.tsx :
+
+```javascript
+// Grid.tsx
+
+import React from 'react';
+
+const Grid = () => {
+    return <div>GRID</div>;
+};
+
+export default Grid;
+```
+
+```javascript
+// Grid.stories.tsx
+
+import React from 'react';
+
+import Grid from './Grid';
+
+export const GridStory = () => <Grid />;
+
+export default {
+    title: 'Grid',
+    component: Grid,
+};
+```
+
+Try to run Storybook
+
+```bash
+yarn storybook
+```
+
+ERROR
+
+```bahsh
+ERROR in ./.storybook/storybook-init-framework-entry.js
+Module build failed (from ./node_modules/@storybook/core/node_modules/babel-loader/lib/index.js):
+Error: Plugin/Preset files are not allowed to export objects, only functions. in ... /node_modules/babel-preset-react/lib/index.js
+
+```
+
+https://github.com/storybookjs/storybook/issues/3843
+
+babel-core missing ?
+
+```bash
+yarn add --dev babel-core
+```
+
+NOPE
+
+12:10 : WHAT THE F**\*\***CK !!!
+
+Storybook need it's own .babelrc :
+
+```json
+// .storybook/.babelrc
+
+{
+    "presets": ["@babel/preset-env", "@babel/preset-react"]
+}
+```
+
+It works now ....
+
+12:12 : Another error :
+
+```javascript
+import React from 'react';
+```
+
+creates an error :
+
+```
+Module '"/Users/amaury/Documents/AE/sudoku/node_modules/@types/react/index"' can only be default-imported using the 'esModuleInterop' flagts(1259)
+```
+
+copy paste tsconfig.json file from another project :
+
+```json
+{
+    "compilerOptions": {
+        "target": "es6",
+        "lib": ["dom", "dom.iterable", "esnext"],
+        "allowJs": true,
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "forceConsistentCasingInFileNames": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "noEmit": true,
+        "jsx": "react",
+        "strict": false
+    },
+    "include": ["src"]
+}
+```
+
+it works now
