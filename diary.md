@@ -2939,3 +2939,19 @@ export default {
 Add a directory for the utils functions to resovle sudoku, clean all AND ...
 
 14:06 : BAM I can finally work on the UI
+
+14:14 : A grid is displayed in a react component !! It only took me 4 hours ^^
+
+It's only in ASCII art for now, time to make a better grid :
+
+15:22 : The UI can display a grid, can click on an spot to get in console its possibilities, can change a value, no check for the moment
+
+18h00 : Sooo what has been added to the UI ?
+
+- Can click on a spot to get the possibilities for this spot
+- Add buttons with the possibilies, click on one of them and it's added to the grid
+- Can get a hin and au select the easiest spot
+- Can auto add one number
+- Can solve the grid each number at a time
+- Stop if the grid has multiple solutions
+- Display an error message and tell if the value added manually is in the row / colum / square
