@@ -1,3 +1,11 @@
+## 2021-03-06
+
+## Added
+
+-   hasEmptySpot
+-   bestSpotWithFewerPossibility
+-   resolve
+
 ## 2021-03-05
 
 ## Added

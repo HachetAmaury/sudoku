@@ -1,3 +1,5 @@
+var _ = require('lodash');
+
 export function decimalToBinary(decimalNumber: number) {
     return decimalNumber.toString(2).padStart(9, '0');
 }
@@ -156,7 +158,27 @@ export function displayGrid(grid) {
     console.log(gridToDisplay);
 }
 
-export function resolveOneIteration(grid) {
+export function hasEmptySpot(grid) {
+    for (let i = 0; i < grid.length; i++) {
+        for (let j = 0; j < grid.length; j++) {
+            if (grid[i][j] === 0) {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+export function bestSpotWithFewerPossibility(grid) {
+    if (!hasEmptySpot(grid)) {
+        return [-1, -1];
+    }
+
+    let amountOfPossibilities = 20;
+    let row = -1;
+    let column = -1;
+
     for (let i = 0; i < grid.length; i++) {
         for (let j = 0; j < grid.length; j++) {
             if (grid[i][j] !== 0) continue;
@@ -181,14 +203,58 @@ export function resolveOneIteration(grid) {
                 missingSetsForSpotOnGrid,
             );
 
-            if (!listOfPossibilityForSpecificSpot.length) continue;
-
-            if (listOfPossibilityForSpecificSpot.length !== 1) continue;
-
-            // console.log(`${i} ${j}`);
-            // console.log(listOfPossibilityForSpecificSpot);
-
-            grid[i][j] = listOfPossibilityForSpecificSpot[0];
+            if (listOfPossibilityForSpecificSpot.length === 1) {
+                return [i, j];
+            } else {
+                if (
+                    amountOfPossibilities >
+                    listOfPossibilityForSpecificSpot.length
+                ) {
+                    amountOfPossibilities =
+                        listOfPossibilityForSpecificSpot.length;
+                    column = j;
+                    row = i;
+                }
+            }
         }
     }
+
+    return [row, column];
+}
+
+export function resolve(grid) {
+    const [i, j] = bestSpotWithFewerPossibility(grid);
+
+    if (i === -1 && j === -1) {
+        displayGrid(grid);
+        return;
+    }
+
+    let columnsSets = getColumnsSetsFromGrid(grid);
+    let rowsSets = getRowsSetsFromGrid(grid);
+    let squaresSets = getSquaresSetsFromGrid(grid);
+
+    let setsForSpotOnGrid = getSetsForSpotOnGrid(
+        i,
+        j,
+        columnsSets,
+        rowsSets,
+        squaresSets,
+    );
+
+    let missingSetsForSpotOnGrid = getMissingBinarySetFromBinarySet(
+        setsForSpotOnGrid,
+    );
+
+    let listOfPossibilityForSpecificSpot = decimalSetToNumbersList(
+        missingSetsForSpotOnGrid,
+    );
+
+    listOfPossibilityForSpecificSpot.forEach((possibility) => {
+        const newGrid = _.cloneDeep(grid);
+
+        newGrid[i][j] = possibility;
+
+        return resolve(newGrid);
+    });
 }
