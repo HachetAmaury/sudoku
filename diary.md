@@ -2643,3 +2643,66 @@ node_modules
 .cache
 dist
 ```
+
+11:30 : Ok now let's add styled-components
+
+```bash
+yarn add --dev styled-components
+```
+
+https://styled-components.com/docs/basics#installation
+
+```
+
+If you use a package manager like yarn that supports the "resolutions" package.json field, we also highly recommend you add an entry to it as well corresponding to the major version range. This helps avoid an entire class of problems that arise from multiple versions of styled-components being installed in your project.
+
+In package.json:
+
+{
+  "resolutions": {
+    "styled-components": "^5"
+  }
+}
+
+```
+
+... OK Why not ...
+
+Change to package.json :
+
+```json
+  "resolutions": {
+    "styled-components": "^5"
+  }
+```
+
+11:38 : Test styled components :
+
+index.tsx :
+
+```javascript
+import styled from 'styled-components';
+
+const Title = styled.h1`
+    font-size: 1.5em;
+    text-align: center;
+    color: palevioletred;
+`;
+
+// Create a Wrapper component that'll render a <section> tag with some styles
+const Wrapper = styled.section`
+    padding: 4em;
+    background: papayawhip;
+`;
+
+render(
+    <Wrapper>
+        <Title>Hello World!</Title>
+    </Wrapper>,
+    document.querySelector('#root'),
+);
+```
+
+It works !!!
+
+11:40 :
