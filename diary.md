@@ -2963,3 +2963,41 @@ Let's make from scratch a grid in css
 19:02 : New css for responsive grid done
 
 20:40 : It's still not perfect but a little better, more responsive
+
+09:08 We still have multiple things to had :
+
+- solve with multiple solutions
+- Generate a random grid
+- highlight the errors on the grid
+- clean the grid back to its original value
+
+09:23 : Reset grid done, hade to use \_.cloneDeep
+
+```javascript
+const newGrid = _.cloneDeep(gridWithOneSolution);
+setGrid(newGrid);
+```
+
+09:56:
+
+I just added a button "Resolve ALL" to compute all solutions and PREViOUS & NEXT to browse solutions
+
+=> I should had a function to count how many numbers are in the grid, if less than n say that there are too much solutions
+
+10:28 : Ok button and function added BUT new problem :
+
+- Question : What happens if the grid is wrong and we ask the function to compute alle the solution ??
+- Answer : .... good question ... apparently it doesn't work, it does nothing
+
+10:38 : So if the grid is wrong ... it simply doesn't find any solutions .... message added : "GRID IS WRONG : NO solution found"
+
+10:39 : Still have to add
+
+- Generate a random grid
+- highlight the errors on the grid
+
+but first ... WHY ARE THE BUTTONS SO SMALL ON MOBILE !!!!
+
+11:06 : better buttons
+
+NOW ... how could I generate a random grid ....

@@ -1,15 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import * as _ from "lodash";
 
 import {
   bestSpotWithFewerPossibility,
+  countNumbersInGrid,
   decimalSetHasNumber,
   getColumnsSetsFromGrid,
   getRowsSetsFromGrid,
   getSquaresSetsFromGrid,
   GridType,
   listOfPossibilityForSpecificSpot,
+  resolve,
 } from "../sudokuLib/utils";
+
+const Button = styled.div`
+  font-family: "champselysees";
+  border-radius: 5px;
+  padding: 1.5vw 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* margin-left: auto;
+  margin-right: auto; */
+  margin: 5px;
+  background-color: lightgray;
+  width: 100%;
+`;
 
 const StyledMainContainer = styled.div`
   width: 100vw;
@@ -64,9 +81,45 @@ const StyledGridItem = styled.div`
 const StyledNumbersButtonContainer = styled.div`
   width: 100%;
   height: 60px;
-  display: grid;
-  grid-template-columns: repeat(9, 1fr);
+  display: flex;
+  justify-content: space-around;
 `;
+
+// const gridWithOneSolution = [
+//   [0, 3, 0, 0, 0, 1, 6, 0, 0],
+//   [0, 0, 0, 0, 4, 0, 9, 0, 0],
+//   [4, 0, 8, 0, 0, 0, 1, 7, 5],
+//   [8, 0, 0, 0, 9, 7, 0, 2, 1],
+//   [3, 1, 7, 2, 0, 6, 0, 0, 0],
+//   [0, 0, 0, 1, 5, 3, 0, 0, 0],
+//   [0, 4, 0, 0, 2, 0, 0, 5, 3],
+//   [0, 5, 9, 0, 3, 0, 0, 0, 7],
+//   [2, 0, 0, 0, 0, 0, 0, 0, 9],
+// ];
+
+// const gridWith36Solutions = [
+//   [0, 0, 0, 6, 0, 0, 0, 2, 0],
+//   [8, 0, 1, 0, 0, 7, 9, 0, 0],
+//   [0, 0, 0, 0, 0, 4, 1, 0, 0],
+//   [0, 0, 5, 0, 0, 8, 0, 0, 0],
+//   [0, 2, 8, 5, 6, 0, 4, 0, 3],
+//   [0, 0, 0, 0, 0, 0, 0, 8, 0],
+//   [0, 0, 0, 0, 9, 0, 0, 0, 7],
+//   [0, 0, 0, 7, 0, 0, 0, 1, 0],
+//   [1, 5, 0, 0, 0, 0, 0, 0, 4],
+// ];
+
+const gridWith36Solutions = [
+  [0, 0, 0, 6, 0, 0, 0, 0, 0],
+  [8, 0, 1, 0, 0, 0, 9, 0, 0],
+  [0, 0, 0, 0, 0, 4, 1, 0, 0],
+  [0, 0, 5, 0, 0, 8, 0, 0, 0],
+  [0, 2, 0, 5, 6, 0, 4, 0, 3],
+  [0, 0, 0, 0, 0, 0, 0, 8, 0],
+  [0, 0, 0, 0, 9, 0, 0, 0, 7],
+  [0, 0, 0, 7, 0, 0, 0, 1, 0],
+  [1, 5, 0, 0, 0, 0, 0, 0, 4],
+];
 
 const MainContainer = () => {
   // More than One solution
@@ -85,17 +138,7 @@ const MainContainer = () => {
 
   // One solution
 
-  const [grid, setGrid] = useState([
-    [0, 3, 0, 0, 0, 1, 6, 0, 0],
-    [0, 0, 0, 0, 4, 0, 9, 0, 0],
-    [4, 0, 8, 0, 0, 0, 1, 7, 5],
-    [8, 0, 0, 0, 9, 7, 0, 2, 1],
-    [3, 1, 7, 2, 0, 6, 0, 0, 0],
-    [0, 0, 0, 1, 5, 3, 0, 0, 0],
-    [0, 4, 0, 0, 2, 0, 0, 5, 3],
-    [0, 5, 9, 0, 3, 0, 0, 0, 7],
-    [2, 0, 0, 0, 0, 0, 0, 0, 9],
-  ]);
+  const [grid, setGrid] = useState(gridWith36Solutions);
 
   const [selectedSpot, setSelectedSpot] = useState([-1, -1]);
   const [selectedSpotPossibilities, setSelectedSpotPossibilities] = useState([
@@ -104,6 +147,15 @@ const MainContainer = () => {
 
   const [info, setInfo] = useState("");
   const [hint, setHint] = useState("");
+
+  const [allSolutions, setAllSolutions] = useState<GridType[]>([]);
+  const [currentSolutionsNumber, setCurrentSolutionsNumber] = useState(0);
+  const [numbersInGrid, setNumbersInGrid] = useState(0);
+
+  useEffect(() => {
+    const numbersInGrid = countNumbersInGrid(grid);
+    setNumbersInGrid(numbersInGrid);
+  }, [grid]);
 
   const onSpotSelected = (row: number, column: number) => {
     let possibilitiesTemp = listOfPossibilityForSpecificSpot(grid, row, column);
@@ -199,37 +251,77 @@ const MainContainer = () => {
     onSpotSelected(i, j);
   };
 
+  const resetGrid = () => {
+    const newGrid = _.cloneDeep(gridWith36Solutions);
+    setCurrentSolutionsNumber(0);
+    setAllSolutions([]);
+    setGrid(newGrid);
+  };
+
+  const displayWarningIfNeed = () => {
+    if (numbersInGrid < 10) {
+      return `Too much solutions, only ${numbersInGrid} numbers in grid`;
+    } else {
+      if (numbersInGrid < 25) {
+        return (
+          <div>
+            <div>{`Many solutions, only ${numbersInGrid} numbers in grid, it might take loooong !! `}</div>
+
+            <Button onClick={resolveAll}>Still find all the solutions</Button>
+          </div>
+        );
+      } else {
+        <Button onClick={resolveAll}>Find all the solutions</Button>;
+      }
+    }
+  };
+
+  const resolveAll = () => {
+    const resultTemp: GridType[] = [];
+
+    resolve(grid, resultTemp);
+
+    if (resultTemp.length) {
+      setAllSolutions(_.cloneDeep(resultTemp));
+    } else {
+      setInfo("GRID IS WRONG : NO solution found ");
+    }
+  };
+
   return (
     <StyledMainContainer>
       <StyledGrid>{displayGrid(grid, onSpotSelected, selectedSpot)}</StyledGrid>
       <div>
         <StyledNumbersButtonContainer>
           {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
-            <button
+            <Button
               key={"key" + num}
               onClick={() =>
                 onNumberEntered(num, selectedSpot[0], selectedSpot[1])
               }
             >
               {num}
-            </button>
+            </Button>
           ))}
         </StyledNumbersButtonContainer>
         <StyledNumbersButtonContainer>
-          <button
+          <Button
             onClick={() => onNumberEntered(0, selectedSpot[0], selectedSpot[1])}
           >
             ERASE
-          </button>
-          <button onClick={giveHint}>Hint</button>
-          <button onClick={solveOne}>Solve One</button>
-          <button onClick={solveAll}>Solve All</button>
+          </Button>
+          <Button onClick={giveHint}>Hint</Button>
+          <Button onClick={solveOne}>Solve One</Button>
+          <Button onClick={solveAll}>Solve All</Button>
+          <Button onClick={resetGrid}>Reset Grid</Button>
         </StyledNumbersButtonContainer>
-
+        {selectedSpotPossibilities.length
+          ? "Possibilities for current spot : "
+          : ""}
         <StyledNumbersButtonContainer>
           {selectedSpotPossibilities.map((possibility) => {
             return (
-              <button
+              <Button
                 key={`possibility-${possibility}`}
                 onClick={() => {
                   onNumberEntered(
@@ -240,13 +332,58 @@ const MainContainer = () => {
                 }}
               >
                 {possibility}
-              </button>
+              </Button>
             );
           })}
         </StyledNumbersButtonContainer>
 
         <div>{info}</div>
         <div>{hint}</div>
+        <div> ---------------------------------------- </div>
+        <div>{numbersInGrid}</div>
+        <StyledNumbersButtonContainer>
+          <div>{displayWarningIfNeed()}</div>
+        </StyledNumbersButtonContainer>
+
+        <StyledNumbersButtonContainer>
+          {allSolutions.length ? (
+            <Button
+              onClick={() => {
+                if (currentSolutionsNumber !== 0) {
+                  setGrid(allSolutions[currentSolutionsNumber]);
+                  setCurrentSolutionsNumber(currentSolutionsNumber - 1);
+                }
+              }}
+            >
+              PREVIOUS
+            </Button>
+          ) : (
+            ""
+          )}
+
+          {allSolutions.length ? (
+            <Button
+              onClick={() => {
+                if (currentSolutionsNumber !== allSolutions.length - 1) {
+                  setGrid(allSolutions[currentSolutionsNumber]);
+                  setCurrentSolutionsNumber(currentSolutionsNumber + 1);
+                }
+              }}
+            >
+              NEXT
+            </Button>
+          ) : (
+            ""
+          )}
+        </StyledNumbersButtonContainer>
+        <div> ---------------------------------------- </div>
+        <div>
+          {allSolutions.length
+            ? `${allSolutions.length} solutions found : Solution ${
+                currentSolutionsNumber + 1
+              }`
+            : ""}
+        </div>
       </div>
     </StyledMainContainer>
   );

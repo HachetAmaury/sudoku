@@ -1,5 +1,4 @@
-var _ = require("lodash");
-
+import * as _ from "lodash";
 
 export type GridType = number[][];
 
@@ -184,6 +183,19 @@ export function hasEmptySpot(grid: GridType) {
   return false;
 }
 
+export function countNumbersInGrid(grid: GridType) {
+  let counter = 0;
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid.length; j++) {
+      if (grid[i][j] !== 0) {
+        counter++;
+      }
+    }
+  }
+
+  return counter;
+}
+
 export function bestSpotWithFewerPossibility (grid:number[][]):[i:number, j:number, possibilities:number[]]  {
   if (!hasEmptySpot(grid)) {
     return [-1, -1, []];
@@ -258,16 +270,16 @@ export function resolve(grid: GridType, result : GridType[]) {
   const [i, j, possibilities] = bestSpotWithFewerPossibility(grid);
 
   if (i === -1 && j === -1) {
-    //displayGrid(grid);
     result.push(grid);
-    return;
+  } else {
+
+    
+    possibilities.forEach((possibility) => {
+      const newGrid = _.cloneDeep(grid);
+      
+      newGrid[i][j] = possibility;
+      
+      resolve(newGrid, result);
+    });
   }
-
-  possibilities.forEach((possibility) => {
-    const newGrid = _.cloneDeep(grid);
-
-    newGrid[i][j] = possibility;
-
-    return resolve(newGrid, result);
-  });
 }
