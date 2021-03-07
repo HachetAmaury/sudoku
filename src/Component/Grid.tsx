@@ -18,7 +18,7 @@ import {
 const Button = styled.div`
   font-family: "champselysees";
   border-radius: 5px;
-  padding: 1.5vw 0;
+  padding: 10px 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,7 +32,6 @@ const Button = styled.div`
 const StyledMainContainer = styled.div`
   width: 100vw;
   height: 100vh;
-
   display: grid;
 
   @media only screen and (max-width: 800px) {
@@ -56,6 +55,8 @@ const StyledGrid = styled.div`
   border: 1px solid black;
   font-size: 30px;
 
+  margin: auto;
+
   .border-bottom {
     border-bottom: 2px solid black;
   }
@@ -67,6 +68,16 @@ const StyledGrid = styled.div`
   .selected {
     background-color: lightgray;
   }
+`;
+
+const StyledCommandsContainer = styled.div`
+  width: 90%;
+  height: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 `;
 
 const StyledGridItem = styled.div`
@@ -312,7 +323,7 @@ const MainContainer = () => {
   return (
     <StyledMainContainer>
       <StyledGrid>{displayGrid(grid, onSpotSelected, selectedSpot)}</StyledGrid>
-      <div>
+      <StyledCommandsContainer>
         <StyledNumbersButtonContainer>
           {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
             <Button
@@ -324,21 +335,6 @@ const MainContainer = () => {
               {num}
             </Button>
           ))}
-        </StyledNumbersButtonContainer>
-        <StyledNumbersButtonContainer>
-          <Button
-            onClick={() =>
-              selectedSpot[0] !== -1 &&
-              selectedSpot[1] !== -1 &&
-              onNumberEntered(0, selectedSpot[0], selectedSpot[1])
-            }
-          >
-            ERASE
-          </Button>
-          <Button onClick={giveHint}>Hint</Button>
-          <Button onClick={solveOne}>Solve One</Button>
-          <Button onClick={solveAll}>Solve All</Button>
-          <Button onClick={resetGrid}>Reset Grid</Button>
         </StyledNumbersButtonContainer>
         {selectedSpotPossibilities.length
           ? "Possibilities for current spot : "
@@ -360,6 +356,21 @@ const MainContainer = () => {
               </Button>
             );
           })}
+        </StyledNumbersButtonContainer>
+        <StyledNumbersButtonContainer>
+          <Button
+            onClick={() =>
+              selectedSpot[0] !== -1 &&
+              selectedSpot[1] !== -1 &&
+              onNumberEntered(0, selectedSpot[0], selectedSpot[1])
+            }
+          >
+            ERASE
+          </Button>
+          <Button onClick={giveHint}>Hint</Button>
+          <Button onClick={solveOne}>Solve One</Button>
+          <Button onClick={solveAll}>Solve All</Button>
+          <Button onClick={resetGrid}>Reset Grid</Button>
         </StyledNumbersButtonContainer>
 
         <StyledNumbersButtonContainer>
@@ -406,7 +417,7 @@ const MainContainer = () => {
               }`
             : ""}
         </div>
-      </div>
+      </StyledCommandsContainer>
     </StyledMainContainer>
   );
 };
