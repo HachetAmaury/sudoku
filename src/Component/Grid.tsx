@@ -195,11 +195,11 @@ const MainContainer = () => {
       }
 
       alert(error);
-    } else {
-      let copy = [...grid];
-      copy[row][column] = number;
-      setGrid(copy);
     }
+
+    let copy = [...grid];
+    copy[row][column] = number;
+    setGrid(copy);
   };
 
   const solveOne = () => {
