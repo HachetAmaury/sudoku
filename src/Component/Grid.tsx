@@ -72,13 +72,20 @@ const StyledGrid = styled.div`
 `;
 
 const StyledCommandsContainer = styled.div`
-  width: 90%;
   height: 100%;
-  margin: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+
+  @media only screen and (max-width: 800px) {
+    width: 100%;
+  }
+
+  @media only screen and (min-width: 800px) {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
 `;
 
 const StyledGridItem = styled.div`
