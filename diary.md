@@ -3028,3 +3028,47 @@ Get a set of 33 full grid, now generateRandomGrid function pick one of these bef
 
 - Generate a MEDIUM grid on startup
 - RESET grid plugged to the generated one
+
+13:09 :
+
+Just realised the algorithm doesn't use the possibilities of all the square to solve one spot
+
+```
+  -----------
+ |  6  9  X  |
+ |  8  5  2  |
+ |  4  Z  Y  |
+  -----------
+
+  - X possibilities (1,7)
+  - Y possibilities (1,7)
+  - Z possibilities (3,7)
+
+  Z possibilities is the only set with 3 so 3 has to be here on the grid
+
+```
+
+```javascript
+
+ cosnt grid = [
+    [0,0,0,0,0,0,1,0,0]
+    [8,0,0,0,0,0,3,0,5]
+    [7,5,0,8,0,4,9,2,6]
+    [3,1,5,4,0,0,2,6,9]
+    [0,7,8,2,0,0,5,1,4]
+    [0,0,0,0,0,5,7,8,3]
+    [0,8,0,0,5,0,6,9,0]
+    [1,3,0,7,0,6,8,5,2]
+    [5,6,0,0,0,0,4,0,0]
+  ],
+
+```
+
+- for each square
+  - for each empty spot
+    - remove from the possibilities thoses that are also in the other spots possibilities
+    - if there is only one possibility left for this spot we found the value for this spot
+
+13:25 : Break
+
+15:00 : I'm back !! ... But maybe it's time to stop optimizing ... it's time to let this project, it's enough

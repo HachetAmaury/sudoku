@@ -144,9 +144,6 @@ const MainContainer = () => {
     0,
   ]);
 
-  const [info, setInfo] = useState("");
-  const [hint, setHint] = useState("");
-
   const [allSolutions, setAllSolutions] = useState<GridType[]>([]);
   const [currentSolutionsNumber, setCurrentSolutionsNumber] = useState(0);
   const [numbersInGrid, setNumbersInGrid] = useState(0);
@@ -197,9 +194,7 @@ const MainContainer = () => {
         error += " already in square";
       }
 
-      setInfo(error);
-    } else {
-      setInfo("");
+      alert(error);
     }
 
     let copy = [...grid];
@@ -214,9 +209,9 @@ const MainContainer = () => {
       onSpotSelected(i, j);
 
       if (possibilities.length === 0) {
-        setInfo("Grid is wrong");
+        alert("Grid is wrong");
       } else if (possibilities.length !== 1) {
-        setInfo("More than one solution");
+        alert("More than one solution");
       } else {
         onNumberEntered(possibilities[0], i, j);
       }
@@ -233,10 +228,10 @@ const MainContainer = () => {
         onSpotSelected(i, j);
 
         if (possibilities.length === 0) {
-          setInfo("Grid is wrong");
+          alert("Grid is wrong");
           break;
         } else if (possibilities.length !== 1) {
-          setInfo("More than one solution");
+          alert("More than one solution");
           break;
         } else {
           onNumberEntered(possibilities[0], i, j);
@@ -248,9 +243,7 @@ const MainContainer = () => {
   };
 
   const giveHint = () => {
-    const [i, j, possibilities] = bestSpotWithFewerPossibility(grid);
-
-    setHint(`${possibilities}`);
+    const [i, j] = bestSpotWithFewerPossibility(grid);
 
     onSpotSelected(i, j);
   };
@@ -294,7 +287,7 @@ const MainContainer = () => {
       setGrid(resultTemp[0]);
       setCurrentSolutionsNumber(0);
     } else {
-      setInfo("GRID IS WRONG : NO solution found ");
+      alert("GRID IS WRONG : NO solution found ");
     }
   };
 
@@ -375,17 +368,12 @@ const MainContainer = () => {
           <Button onClick={generateMediumGrid}>generate MEDIUM</Button>
           <Button onClick={generateEasyGrid}>generate EASY</Button>
         </StyledNumbersButtonContainer>
-
-        <div>{info}</div>
-        <div>{hint}</div>
-        <div> ---------------------------------------- </div>
-        <div>{numbersInGrid}</div>
         <StyledNumbersButtonContainer>
           {displayWarningIfNeed()}
         </StyledNumbersButtonContainer>
 
-        <StyledNumbersButtonContainer>
-          {allSolutions.length ? (
+        {allSolutions.length ? (
+          <StyledNumbersButtonContainer>
             <Button
               onClick={() => {
                 if (currentSolutionsNumber !== 0) {
@@ -396,11 +384,7 @@ const MainContainer = () => {
             >
               PREVIOUS
             </Button>
-          ) : (
-            ""
-          )}
 
-          {allSolutions.length ? (
             <Button
               onClick={() => {
                 if (currentSolutionsNumber !== allSolutions.length - 1) {
@@ -411,11 +395,10 @@ const MainContainer = () => {
             >
               NEXT
             </Button>
-          ) : (
-            ""
-          )}
-        </StyledNumbersButtonContainer>
-        <div> ---------------------------------------- </div>
+          </StyledNumbersButtonContainer>
+        ) : (
+          ""
+        )}
         <div>
           {allSolutions.length
             ? `${allSolutions.length} solutions found : Solution ${
