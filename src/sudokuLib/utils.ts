@@ -759,7 +759,7 @@ const ALL_THE_SOLUTIONS = [
 
 export function generateRandomGrid(emptyNumberNeeded :number){
 
-  const randomGrid = _.cloneDeep(ALL_THE_SOLUTIONS[randomIntFromInterval(0,ALL_THE_SOLUTIONS.length)])
+  const randomGrid = _.cloneDeep(ALL_THE_SOLUTIONS[randomIntFromInterval(0,ALL_THE_SOLUTIONS.length-1)])
 
   generateGrid(randomGrid,emptyNumberNeeded)
   
