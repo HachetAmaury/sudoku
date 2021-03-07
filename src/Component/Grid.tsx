@@ -27,6 +27,7 @@ const Button = styled.div`
   margin: 5px;
   background-color: lightgray;
   width: 100%;
+  text-align: center;
 `;
 
 const StyledMainContainer = styled.div`
