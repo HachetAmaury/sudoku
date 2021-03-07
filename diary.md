@@ -3001,3 +3001,30 @@ but first ... WHY ARE THE BUTTONS SO SMALL ON MOBILE !!!!
 11:06 : better buttons
 
 NOW ... how could I generate a random grid ....
+
+Solution 1 : Take a full grid and remove elements
+
+- easy : remove 10 elements
+- medium : remove 20 elements
+- hard : remove 30 elements
+
+Should remove the elements randomly
+
+11:36 : its' done but
+
+- easy : remove 30 elements
+- medium : remove 40 elements
+- hard : remove 50 elements
+
+Should be better
+
+11:42 It is better ... but some easy grid have multiple solutions ... is it a problem ? Let's see...
+
+12:41 : More randomness added :
+
+Get a set of 33 full grid, now generateRandomGrid function pick one of these before removing some number randomly
+
+12:57 :
+
+- Generate a MEDIUM grid on startup
+- RESET grid plugged to the generated one

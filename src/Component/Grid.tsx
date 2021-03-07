@@ -6,6 +6,9 @@ import {
   bestSpotWithFewerPossibility,
   countNumbersInGrid,
   decimalSetHasNumber,
+  displayGridStr,
+  generateGrid,
+  generateRandomGrid,
   getColumnsSetsFromGrid,
   getRowsSetsFromGrid,
   getSquaresSetsFromGrid,
@@ -121,24 +124,22 @@ const gridWith36Solutions = [
   [1, 5, 0, 0, 0, 0, 0, 0, 4],
 ];
 
+const fullGrid = [
+  [5, 4, 3, 6, 1, 9, 7, 2, 8],
+  [8, 6, 1, 2, 3, 7, 9, 4, 5],
+  [7, 9, 2, 8, 5, 4, 1, 3, 6],
+  [3, 1, 5, 4, 7, 8, 2, 6, 9],
+  [9, 2, 8, 5, 6, 1, 4, 7, 3],
+  [4, 7, 6, 9, 2, 3, 5, 8, 1],
+  [2, 8, 4, 1, 9, 6, 3, 5, 7],
+  [6, 3, 9, 7, 4, 5, 8, 1, 2],
+  [1, 5, 7, 3, 8, 2, 6, 9, 4],
+];
+
 const MainContainer = () => {
-  // More than One solution
+  const [grid, setGrid] = useState<GridType>([]);
 
-  // const [grid, setGrid] = useState([
-  //   [0, 0, 0, 6, 0, 0, 0, 2, 0],
-  //   [8, 0, 1, 0, 0, 7, 9, 0, 0],
-  //   [0, 0, 0, 0, 0, 4, 1, 0, 0],
-  //   [0, 0, 5, 0, 0, 8, 0, 0, 0],
-  //   [0, 2, 8, 5, 6, 0, 4, 0, 3],
-  //   [0, 0, 0, 0, 0, 0, 0, 8, 0],
-  //   [0, 0, 0, 0, 9, 0, 0, 0, 7],
-  //   [0, 0, 0, 7, 0, 0, 0, 1, 0],
-  //   [1, 5, 0, 0, 0, 0, 0, 0, 4],
-  // ]);
-
-  // One solution
-
-  const [grid, setGrid] = useState(gridWith36Solutions);
+  const [initGrid, setInitGrid] = useState<GridType>([]);
 
   const [selectedSpot, setSelectedSpot] = useState([-1, -1]);
   const [selectedSpotPossibilities, setSelectedSpotPossibilities] = useState([
@@ -156,6 +157,10 @@ const MainContainer = () => {
     const numbersInGrid = countNumbersInGrid(grid);
     setNumbersInGrid(numbersInGrid);
   }, [grid]);
+
+  useEffect(() => {
+    generateMediumGrid();
+  }, []);
 
   const onSpotSelected = (row: number, column: number) => {
     let possibilitiesTemp = listOfPossibilityForSpecificSpot(grid, row, column);
@@ -251,11 +256,15 @@ const MainContainer = () => {
     onSpotSelected(i, j);
   };
 
-  const resetGrid = () => {
-    const newGrid = _.cloneDeep(gridWith36Solutions);
+  const clearSolutions = () => {
     setCurrentSolutionsNumber(0);
     setAllSolutions([]);
+  };
+
+  const resetGrid = () => {
+    const newGrid = _.cloneDeep(initGrid);
     setGrid(newGrid);
+    clearSolutions();
   };
 
   const displayWarningIfNeed = () => {
@@ -271,7 +280,7 @@ const MainContainer = () => {
           </div>
         );
       } else {
-        <Button onClick={resolveAll}>Find all the solutions</Button>;
+        return <Button onClick={resolveAll}>Find all the solutions</Button>;
       }
     }
   };
@@ -283,9 +292,29 @@ const MainContainer = () => {
 
     if (resultTemp.length) {
       setAllSolutions(_.cloneDeep(resultTemp));
+      setGrid(resultTemp[0]);
+      setCurrentSolutionsNumber(0);
     } else {
       setInfo("GRID IS WRONG : NO solution found ");
     }
+  };
+
+  const generateHardGrid = () => {
+    createANewGrid(50);
+  };
+
+  const generateMediumGrid = () => {
+    createANewGrid(40);
+  };
+  const generateEasyGrid = () => {
+    createANewGrid(30);
+  };
+
+  const createANewGrid = (numberToRemove: number) => {
+    const randomGrid = generateRandomGrid(numberToRemove);
+    setGrid(randomGrid);
+    setInitGrid(_.cloneDeep(randomGrid));
+    clearSolutions();
   };
 
   return (
@@ -306,7 +335,11 @@ const MainContainer = () => {
         </StyledNumbersButtonContainer>
         <StyledNumbersButtonContainer>
           <Button
-            onClick={() => onNumberEntered(0, selectedSpot[0], selectedSpot[1])}
+            onClick={() =>
+              selectedSpot[0] !== -1 &&
+              selectedSpot[1] !== -1 &&
+              onNumberEntered(0, selectedSpot[0], selectedSpot[1])
+            }
           >
             ERASE
           </Button>
@@ -337,12 +370,19 @@ const MainContainer = () => {
           })}
         </StyledNumbersButtonContainer>
 
+        <StyledNumbersButtonContainer>
+          <Button onClick={generateHardGrid}>generate HARD</Button>
+
+          <Button onClick={generateMediumGrid}>generate MEDIUM</Button>
+          <Button onClick={generateEasyGrid}>generate EASY</Button>
+        </StyledNumbersButtonContainer>
+
         <div>{info}</div>
         <div>{hint}</div>
         <div> ---------------------------------------- </div>
         <div>{numbersInGrid}</div>
         <StyledNumbersButtonContainer>
-          <div>{displayWarningIfNeed()}</div>
+          {displayWarningIfNeed()}
         </StyledNumbersButtonContainer>
 
         <StyledNumbersButtonContainer>
