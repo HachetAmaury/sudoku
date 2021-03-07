@@ -6,8 +6,6 @@ import {
   bestSpotWithFewerPossibility,
   countNumbersInGrid,
   decimalSetHasNumber,
-  displayGridStr,
-  generateGrid,
   generateRandomGrid,
   getColumnsSetsFromGrid,
   getRowsSetsFromGrid,
@@ -112,29 +110,29 @@ const StyledNumbersButtonContainer = styled.div`
 //   [1, 5, 0, 0, 0, 0, 0, 0, 4],
 // ];
 
-const gridWith36Solutions = [
-  [0, 0, 0, 6, 0, 0, 0, 0, 0],
-  [8, 0, 1, 0, 0, 0, 9, 0, 0],
-  [0, 0, 0, 0, 0, 4, 1, 0, 0],
-  [0, 0, 5, 0, 0, 8, 0, 0, 0],
-  [0, 2, 0, 5, 6, 0, 4, 0, 3],
-  [0, 0, 0, 0, 0, 0, 0, 8, 0],
-  [0, 0, 0, 0, 9, 0, 0, 0, 7],
-  [0, 0, 0, 7, 0, 0, 0, 1, 0],
-  [1, 5, 0, 0, 0, 0, 0, 0, 4],
-];
+// const gridWith36Solutions = [
+//   [0, 0, 0, 6, 0, 0, 0, 0, 0],
+//   [8, 0, 1, 0, 0, 0, 9, 0, 0],
+//   [0, 0, 0, 0, 0, 4, 1, 0, 0],
+//   [0, 0, 5, 0, 0, 8, 0, 0, 0],
+//   [0, 2, 0, 5, 6, 0, 4, 0, 3],
+//   [0, 0, 0, 0, 0, 0, 0, 8, 0],
+//   [0, 0, 0, 0, 9, 0, 0, 0, 7],
+//   [0, 0, 0, 7, 0, 0, 0, 1, 0],
+//   [1, 5, 0, 0, 0, 0, 0, 0, 4],
+// ];
 
-const fullGrid = [
-  [5, 4, 3, 6, 1, 9, 7, 2, 8],
-  [8, 6, 1, 2, 3, 7, 9, 4, 5],
-  [7, 9, 2, 8, 5, 4, 1, 3, 6],
-  [3, 1, 5, 4, 7, 8, 2, 6, 9],
-  [9, 2, 8, 5, 6, 1, 4, 7, 3],
-  [4, 7, 6, 9, 2, 3, 5, 8, 1],
-  [2, 8, 4, 1, 9, 6, 3, 5, 7],
-  [6, 3, 9, 7, 4, 5, 8, 1, 2],
-  [1, 5, 7, 3, 8, 2, 6, 9, 4],
-];
+// const fullGrid = [
+//   [5, 4, 3, 6, 1, 9, 7, 2, 8],
+//   [8, 6, 1, 2, 3, 7, 9, 4, 5],
+//   [7, 9, 2, 8, 5, 4, 1, 3, 6],
+//   [3, 1, 5, 4, 7, 8, 2, 6, 9],
+//   [9, 2, 8, 5, 6, 1, 4, 7, 3],
+//   [4, 7, 6, 9, 2, 3, 5, 8, 1],
+//   [2, 8, 4, 1, 9, 6, 3, 5, 7],
+//   [6, 3, 9, 7, 4, 5, 8, 1, 2],
+//   [1, 5, 7, 3, 8, 2, 6, 9, 4],
+// ];
 
 const MainContainer = () => {
   const [grid, setGrid] = useState<GridType>([]);
@@ -160,6 +158,7 @@ const MainContainer = () => {
 
   useEffect(() => {
     generateMediumGrid();
+    // eslint-disable-next-line
   }, []);
 
   const onSpotSelected = (row: number, column: number) => {
